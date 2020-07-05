@@ -10,17 +10,32 @@ source("r/use_hierplane.R")
 
 spacyr::spacy_initialize()
 
-txt <- "i paid $90 for this piece of paper"
+txt <- c(
+  "i paid $90,000 for this piece of paper",
+  "tylurp just completed a $2,000,000 transaction addressed to nigerian.prince@notscam.com. ",
+  "look @ him go",
+  "cat cats CAT CATTTTT"
+)
 
-tree <- build_tree(txt)
 
 ui <- fluidPage(
   use_hierplane(),
-  shinyjs::useShinyjs()
+  shinyjs::useShinyjs(),
+  selectInput(inputId = "text", label = "pick sentence", choices = txt),
+  selectInput(inputId = "theme", label = "pick theme",
+              choices = c("light", "dark")),
+  div(id = "hierplane_output")
 )
 
 server <- function(input, output, session) {
-  hierplane_js(tree$t_json)
+  observeEvent(c(input$text,
+                 input$theme), {
+
+    tree <- build_tree(input$text)
+    hierplane_js(tree$t_json, theme = input$theme)
+
+  })
+
 }
 
 shinyApp(ui, server)

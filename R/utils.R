@@ -32,11 +32,15 @@ pull_word_span <- function(txt, word_id) {
   tokens <- spacyr::spacy_tokenize(txt)[[1]]
 
   word <- tokens[word_id]
-  which_loc <- which(which(tokens %in% word) %in% word_id)
 
-  is_punct <- grepl("[[:punct:]]", word)
+
+  # present symbol from being interpreted as regex
+  is_punct <- grepl("^[[:punct:]]$", word)
   if (is_punct) word <- paste0("[", word, "]")
 
+  # count all prior occurences
+  which_loc <- 1 + str_count(paste(tokens[1:word_id - 1],
+                                      collapse = " "), word)
   word_locs <- stringr::str_locate_all(txt, word)[[1]][which_loc, ]
 
   list(start = word_locs[["start"]] - 1,
@@ -52,6 +56,8 @@ pull_attr <- function(sp_tib, attributes) {
     as.list
 }
 
-hierplane_js <- function(x) {
-  shinyjs::runjs(paste0("const tree = ", x, "; hierplane.renderTree(tree);"))
+hierplane_js <- function(x, theme = "light") {
+  shinyjs::runjs(paste0("const tree = ", x, ";
+                        hierplane.renderTree(tree, { target: '#hierplane_output', theme: '",
+                        theme,"' });"))
 }
