@@ -84,14 +84,16 @@ build_nodes <- function(sp_tib,
 
   r <- list()
 
-  r$nodeType <- sp_tib[sp_tib[, word_id] == root, nodetype]
-  r$word <- sp_tib[sp_tib[, word_id] == root, word]
-  r$attributes <- pull_attr(sp_tib[sp_tib[, word_id] == root, ], attributes)
-  r$link <- sp_tib[sp_tib[, word_id] == root, link]
+  cur_tib <- sp_tib[sp_tib[, word_id] == root,]
+
+  r$nodeType <- cur_tib[[nodetype]]
+  r$word <- cur_tib[[word]]
+  r$attributes <- pull_attr(cur_tib, attributes)
+  r$link <- cur_tib[[link]]
 
   if (!is.null(r$word) & length(r$word) > 0) {
     r$spans <- list(pull_word_span(sp_tib$txt[1],
-                                   sp_tib[sp_tib[, word_id] == root, word_id]))
+                                   cur_tib[[word_id]]))
   }
 
   children <- sp_tib[sp_tib[, parent_id] == root, 2]
