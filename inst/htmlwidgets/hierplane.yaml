@@ -1,0 +1,7 @@
+# (uncomment to add a dependency)
+dependencies:
+ - name: hierplane
+   version: 0.2.1
+   src: htmlwidgets/lib/hierplane-0.2.1
+   script: hierplane.min.js
+   stylesheet: hierplane.min.css

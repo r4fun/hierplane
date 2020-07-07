@@ -1,10 +1,3 @@
-suppressWarnings({
-  library(testthat)
-  # library(hierplane) - uncomment after build
-})
-
-source(test_path("../../r/utils.r"))
-
 test_that("Single occurence - word", {
 
   # single occurence - word
@@ -90,4 +83,3 @@ test_that("Works for pulling first word", {
   expect_equal(test_output, expect_output)
 
 })
-

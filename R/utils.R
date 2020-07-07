@@ -20,14 +20,16 @@ get_sents <- function(txt, delims = c(".", "?", "!")) {
   unlist(strsplit(txt, paste0("(?<=", delims,")\\s(?=[A-Z])"), perl = TRUE))
 }
 
-transform_logical <- function(sp_tib) {
-  for (bool_col in which(sapply(sp_tib, is.logical))) {
-    bool_name <- names(sp_tib)[bool_col]
-    sp_tib[[bool_col]] <- if_else(sp_tib[[bool_col]],
-                                  gsub(".*_", "", bool_name),
-                                  "")
+transform_logical <- function(x) {
+  for (bool_col in which(sapply(x, is.logical))) {
+    bool_name <- names(x)[bool_col]
+    x[[bool_col]] <- ifelse(
+      test = x[[bool_col]],
+      yes = gsub(".*_", "", bool_name),
+      no = ""
+    )
   }
-  sp_tib
+  x
 }
 
 
@@ -59,28 +61,4 @@ pull_attr <- function(sp_tib, attributes) {
     as.vector %>%
     .[nchar(.) > 0] %>%
     as.list
-}
-
-hierplane_js <- function(x,
-                         div_name = "hierplane_output",
-                         theme = "light") {
-  shinyjs::runjs(
-    paste0(
-      "const tree = ", x, ";
-      hierplane.renderTree(tree, { target: '#", div_name, "', ",
-      "theme: '", theme,"' });"
-      )
-    )
-}
-
-hierplane_js_obj <- function(x, obj_name, theme = "light") {
-  shinyjs::runjs(
-    paste0(
-      "const tree = ", x, "; ",
-      "hierplane.renderTree(tree, { target: '#", obj_name, "', ",
-      "theme: '", theme,"' });"
-
-      )
-    # paste0("Shiny.onInputChange('", obj_name,"', '", x, "')")
-  )
 }
