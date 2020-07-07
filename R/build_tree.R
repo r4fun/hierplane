@@ -8,15 +8,8 @@
 #' @md
 #' @export
 
-build_tree <- function(txt,
-                       nodetype = "dep_",
-                       word = "token",
-                       link = "dep_",
-                       attributes = c("ent_type_", "pos",
-                                      "is_currency",
-                                      "like_url",
-                                      "like_email"),
-                       word_id = "token_id") {
+build_tree <- function(txt) {
+  attributes <- c("ent_type_", "pos", "is_currency", "like_url", "like_email")
 
   sp_tib <- transform_logical(spacy_df(txt))
 
@@ -32,25 +25,23 @@ build_tree <- function(txt,
     as.data.frame()
 
   children <- build_nodes(sp_tib = sp_tib_children,
-                          nodetype = nodetype,
-                          word = word,
-                          link = link,
+                          nodetype = "dep_",
+                          word = "token",
+                          link = "dep_",
                           attributes = attributes,
-                          word_id = word_id)
+                          word_id = "token_id")
 
   out_list <- list(
     text = txt,
     root = list(
-      nodeType = sp_tib_root[[nodetype]],
-      word = sp_tib_root[[word]],
+      nodeType = sp_tib_root$dep_,
+      word = sp_tib_root$token,
       attributes = pull_attr(sp_tib_root, attributes),
-      spans = list(pull_word_span(txt, sp_tib_root[[word_id]])),
+      spans = list(pull_word_span(txt, sp_tib_root$token_id)),
       children = children$children)
   )
 
-
-  list(t_list = out_list,
-       t_json = jsonlite::toJSON(out_list, pretty = T, auto_unbox = T))
+  jsonlite::toJSON(out_list, pretty = TRUE, auto_unbox = TRUE)
 
 }
 
