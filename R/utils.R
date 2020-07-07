@@ -7,73 +7,58 @@ spacy_tibble <- function(txt, ...) {
     additional_attributes = c(
       "ent_type_",
       "dep_",
+      "is_currency",
+      "like_url",
+      "like_email",
       ...
     )
   ))
 }
 
-pull_tree_data <- function(x, root_col, root_val, type = "root") {
-  if (type == "root")
-    x[x[[root_col]] %in% root_val, ]
-  else if (type == "child")
-    x[!x[[root_col]] %in% root_val, ]
+get_sents <- function(txt, delims = c(".", "?", "!")) {
+  delims <- paste(paste0("\\", delims), collapse = "|")
+  unlist(strsplit(txt, paste0("(?<=", delims,")\\s(?=[A-Z])"), perl = TRUE))
 }
 
-pull_word_span <- function(txt, word) {
-  x <- stringr::str_locate(txt, word)
-  list(
-    start = x[1] - 1,
-    end = x[2]
-  )
-}
-
-parse_children <- function(txt, child, nodetype, word, link, attributes, parent_id, child_id) {
-  list(
-    nodeType = child[[nodetype]],
-    word = child[[word]],
-    link = child[[link]],
-    attributes = I(child[[attributes]]),
-    parent_id = child[[parent_id]],
-    child_id = child[[child_id]],
-    spans = list(
-      list(
-        start = pull_word_span(txt, child[[word]])$start,
-        end = pull_word_span(txt, child[[word]])$end
-      )
+transform_logical <- function(x) {
+  for (bool_col in which(sapply(x, is.logical))) {
+    bool_name <- names(x)[bool_col]
+    x[[bool_col]] <- ifelse(
+      test = x[[bool_col]],
+      yes = gsub(".*_", "", bool_name),
+      no = ""
     )
-  )
+  }
+  x
 }
 
-parse_hierplane <- function(txt, root, children, nodetype, word, link, attributes, word_id, parent_id, child_id) {
-  list(
-    text = txt,
-    root = list(
-      nodeType = root[[nodetype]],
-      word = root[[word]],
-      link = root[[link]],
-      attributes = I(root[[attributes]]),
-      spans = list(
-        list(
-          start = pull_word_span(txt, root[[word]])$start,
-          end = pull_word_span(txt, root[[word]])$end
-        )
-      ),
-      children = lapply(unname(split(children, children[[word_id]])), function(x) {
-        parse_children(
-          txt = txt,
-          child = x,
-          nodetype = nodetype,
-          word = word,
-          link = link,
-          attributes = I(attributes),
-          parent_id = parent_id,
-          child_id = child_id
-        )
-      })
-    )
-  )
+
+
+pull_word_span <- function(txt, word_id) {
+
+  tokens <- spacyr::spacy_tokenize(txt)[[1]]
+
+  word <- tokens[word_id]
+
+
+  # present symbol from being interpreted as regex
+  is_punct <- grepl("^[[:punct:]]$", word)
+  if (is_punct) word <- paste0("[", word, "]")
+
+  # count all prior occurences
+  which_loc <- 1 + str_count(paste(tokens[1:word_id - 1],
+                                      collapse = " "), word)
+  word_locs <- stringr::str_locate_all(txt, word)[[1]][which_loc, ]
+
+  list(start = word_locs[["start"]] - 1,
+       end = word_locs[["end"]])
+
 }
 
-hierplane_js <- function(x) {
-  shinyjs::runjs(paste0("const tree = ", x, "; hierplane.renderTree(tree);"))
+pull_attr <- function(sp_tib, attributes) {
+  sapply(attributes, function(x) sp_tib[[x]]) %>%
+    unlist %>%
+    as.vector %>%
+    .[nchar(.) > 0] %>%
+    as.list
 }
