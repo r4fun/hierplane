@@ -1,11 +1,8 @@
-build_tree <- function(txt) {
-  attributes <- c("ent_type_", "pos", "is_currency", "like_url", "like_email")
+build_tree <- function(txt, attributes = spacy_attributes()) {
   x <- transform_logical(spacy_df(txt))
 
   root <- parse_root(x)
-  child <- parse_children(x, txt, root$id)
-
-  children <- build_nodes(x = child)
+  children <- build_nodes(parse_children(x, txt, root$id), root$id)
 
   out_list <- list(
     text = txt,
@@ -18,15 +15,12 @@ build_tree <- function(txt) {
   )
 
   jsonlite::toJSON(out_list, pretty = TRUE, auto_unbox = TRUE)
-
 }
 
-build_nodes <- function(x, root = x[1, 1]) {
-  attributes <- c("ent_type_", "pos", "is_currency", "like_url", "like_email")
+build_nodes <- function(x, root, attributes = spacy_attributes()) {
 
   if (is.factor(root))
     root <- as.character(root)
-
 
   r <- list()
 
@@ -38,8 +32,7 @@ build_nodes <- function(x, root = x[1, 1]) {
   r$link <- cur_tib$dep_
 
   if (!is.null(r$word) & length(r$word) > 0) {
-    r$spans <- list(pull_word_span(x$txt[1],
-                                   cur_tib$token_id))
+    r$spans <- list(pull_word_span(x$txt[1], cur_tib$token_id))
   }
 
   children <- x[x[, "head_token_id"] == root, 2]
@@ -52,7 +45,6 @@ build_nodes <- function(x, root = x[1, 1]) {
   }
 
   r
-
 }
 
 

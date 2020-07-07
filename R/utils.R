@@ -22,6 +22,8 @@ parse_root <- function(x) {
   )
 }
 
+spacy_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
+
 parse_children <- function(x, txt, root_id) {
   x <- x[!x$head_token_id == x$token_id, ]
   x$sort_order <- ifelse(x$head_token_id %in% root_id, 0, 1)
