@@ -18,8 +18,7 @@ build_tree <- function(txt,
                                       "like_email"),
                        word_id = "token_id") {
 
-  sp_tib <- spacy_tibble(txt) %>%
-    transform_logical()
+  sp_tib <- transform_logical(spacy_df(txt))
 
   root_id <- sp_tib$token_id[sp_tib$dep_rel %in% "ROOT"]
   sp_tib_root <- sp_tib[sp_tib$dep_rel %in% "ROOT", ]

@@ -1,5 +1,5 @@
-spacy_tibble <- function(txt, ...) {
-  tibble::as_tibble(spacyr::spacy_parse(
+spacy_df <- function(txt, ...) {
+  spacyr::spacy_parse(
     x = txt,
     entity = TRUE,
     dependency = TRUE,
@@ -12,7 +12,7 @@ spacy_tibble <- function(txt, ...) {
       "like_email",
       ...
     )
-  ))
+  )
 }
 
 get_sents <- function(txt, delims = c(".", "?", "!")) {
