@@ -24,6 +24,18 @@ parse_root <- function(x) {
 
 spacy_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
 
+tree <- function(txt, root, children, attributes) {
+  list(
+    text = txt,
+    root = list(
+      nodeType = root$dat$dep_,
+      word = root$dat$token,
+      attributes = pull_attr(root$dat, attributes),
+      spans = list(pull_word_span(txt, root$dat$token_id)),
+      children = children$children)
+  )
+}
+
 parse_children <- function(x, txt, root_id) {
   x <- x[!x$head_token_id == x$token_id, ]
   x$sort_order <- ifelse(x$head_token_id %in% root_id, 0, 1)

@@ -4,17 +4,11 @@ build_tree <- function(txt, attributes = spacy_attributes()) {
   root <- parse_root(x)
   children <- build_nodes(parse_children(x, txt, root$id), root$id)
 
-  out_list <- list(
-    text = txt,
-    root = list(
-      nodeType = root$dat$dep_,
-      word = root$dat$token,
-      attributes = pull_attr(root$dat, attributes),
-      spans = list(pull_word_span(txt, root$dat$token_id)),
-      children = children$children)
+  jsonlite::toJSON(
+    x = tree(txt, root, children, attributes),
+    pretty = TRUE,
+    auto_unbox = TRUE
   )
-
-  jsonlite::toJSON(out_list, pretty = TRUE, auto_unbox = TRUE)
 }
 
 build_nodes <- function(x, root, attributes = spacy_attributes()) {
