@@ -5,11 +5,11 @@
 #' @import htmlwidgets
 #'
 #' @export
-hierplane <- function(tree, width = NULL, height = NULL, elementId = NULL) {
+hierplane <- function(txt, width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
   x = list(
-    tree = tree
+    tree = build_tree(txt)
   )
 
   # create widget

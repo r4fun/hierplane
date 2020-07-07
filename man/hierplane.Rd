@@ -4,7 +4,7 @@
 \alias{hierplane}
 \title{<Add Title>}
 \usage{
-hierplane(tree, width = NULL, height = NULL, elementId = NULL)
+hierplane(txt, width = NULL, height = NULL, elementId = NULL)
 }
 \description{
 <Add Description>

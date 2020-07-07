@@ -12,7 +12,6 @@ build_tree <- function(txt, attributes = spacy_attributes()) {
 }
 
 build_nodes <- function(x, root, attributes = spacy_attributes()) {
-
   if (is.factor(root))
     root <- as.character(root)
 
