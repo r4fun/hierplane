@@ -15,6 +15,24 @@ spacy_df <- function(txt, ...) {
   )
 }
 
+parse_root <- function(x) {
+  list(
+    id = x$token_id[x$dep_rel %in% "ROOT"],
+    dat = x[x$dep_rel %in% "ROOT", ]
+  )
+}
+
+parse_children <- function(x, txt, root_id) {
+  x <- x[!x$head_token_id == x$token_id, ]
+  x$sort_order <- ifelse(x$head_token_id %in% root_id, 0, 1)
+  x$txt <- txt
+  x <- x[with(x, order(x$sort_order, x$token_id)), ]
+  x[c("head_token_id", "token_id", c("doc_id", "sentence_id", "token", "lemma", "pos",
+                                     "tag", "dep_rel", "entity", "ent_type_", "dep_",
+                                     "is_currency", "like_url", "like_email",
+                                     "sort_order", "txt"))]
+}
+
 get_sents <- function(txt, delims = c(".", "?", "!")) {
   delims <- paste(paste0("\\", delims), collapse = "|")
   unlist(strsplit(txt, paste0("(?<=", delims,")\\s(?=[A-Z])"), perl = TRUE))

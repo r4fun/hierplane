@@ -10,21 +10,12 @@
 
 build_tree <- function(txt) {
   attributes <- c("ent_type_", "pos", "is_currency", "like_url", "like_email")
+  x <- transform_logical(spacy_df(txt))
 
-  sp_tib <- transform_logical(spacy_df(txt))
+  root <- parse_root(x)
+  child <- parse_children(x, txt, root$id)
 
-  root_id <- sp_tib$token_id[sp_tib$dep_rel %in% "ROOT"]
-  sp_tib_root <- sp_tib[sp_tib$dep_rel %in% "ROOT", ]
-
-  sp_tib_children <- sp_tib %>%
-    filter(!head_token_id == token_id) %>%
-    mutate(sort_order = ifelse(head_token_id %in% root_id, 0, 1),
-           txt = txt) %>%
-    arrange(sort_order, token_id) %>%
-    select(head_token_id, token_id, everything()) %>%
-    as.data.frame()
-
-  children <- build_nodes(sp_tib = sp_tib_children,
+  children <- build_nodes(sp_tib = child,
                           nodetype = "dep_",
                           word = "token",
                           link = "dep_",
@@ -34,10 +25,10 @@ build_tree <- function(txt) {
   out_list <- list(
     text = txt,
     root = list(
-      nodeType = sp_tib_root$dep_,
-      word = sp_tib_root$token,
-      attributes = pull_attr(sp_tib_root, attributes),
-      spans = list(pull_word_span(txt, sp_tib_root$token_id)),
+      nodeType = root$dat$dep_,
+      word = root$dat$token,
+      attributes = pull_attr(root$dat, attributes),
+      spans = list(pull_word_span(txt, root$dat$token_id)),
       children = children$children)
   )
 
