@@ -18,6 +18,28 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
+          ## the conda installation instruction comes from
+          ## https://conda.io/docs/user-guide/tasks/use-conda-with-travis-ci.html
+          sudo apt-get update
+          wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+          bash miniconda.sh -b -p $HOME/miniconda
+          rm miniconda.sh
+          export PATH="$HOME/miniconda/bin:$PATH"
+          hash -r
+          conda config --set always_yes yes --set changeps1 no
+          conda update -q conda
+          # Useful for debugging any issues with conda
+          conda info -a
+          R CMD INSTALL .
+          R -e 'spacyr::spacy_install(prompt=FALSE, pip = TRUE)'
+          # The following lines will be removed once issue-171 is merged
+          # - source ~/miniconda/etc/profile.d/conda.sh
+          # - conda activate spacy_condaenv
+          # - python -m spacy link en_core_web_sm en
+          # - conda deactivate
+          # - conda install -n spacy_condaenv -c omgarcia gcc-6 # https://github.com/conda/conda/issues/8415
+          R -e 'spacyr::spacy_download_langmodel(model="en")' # create a link 'en'
+          R -e 'spacyr::spacy_download_langmodel(model="de")'
         shell: Rscript {0}
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")

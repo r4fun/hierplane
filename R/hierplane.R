@@ -6,6 +6,7 @@
 #' parse the correct tree structure that the JavaScript library expects.
 #'
 #' @param txt A string of text
+#' @param theme Either light or dark
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
