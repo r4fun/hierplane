@@ -2,10 +2,26 @@
 % Please edit documentation in R/hierplane.R
 \name{hierplane}
 \alias{hierplane}
-\title{<Add Title>}
+\title{Render a hierplane}
+\source{
+https://github.com/allenai/hierplane
+}
 \usage{
-hierplane(tree, width = NULL, height = NULL, elementId = NULL)
+hierplane(txt, width = NULL, height = NULL, elementId = NULL)
+}
+\arguments{
+\item{txt}{A string of text}
+
+\item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
+\code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
+string and have \code{'px'} appended.}
+
+\item{elementId}{Explicitly provide an element ID to the widget rather than
+an automatically generated one. This is optional.}
 }
 \description{
-<Add Description>
+Hierplanes visualize hierarchical data, specifically tailored towards
+rendering dependency parses. The user only needs to provide a string of text.
+Hierplane will call on \code{spacyr::spacy_parse()} to generate a dataframe and
+parse the correct tree structure that the JavaScript library expects.
 }

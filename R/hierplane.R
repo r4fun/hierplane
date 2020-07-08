@@ -1,15 +1,26 @@
-#' <Add Title>
+#' Render a hierplane
 #'
-#' <Add Description>
+#' Hierplanes visualize hierarchical data, specifically tailored towards
+#' rendering dependency parses. The user only needs to provide a string of text.
+#' Hierplane will call on `spacyr::spacy_parse()` to generate a dataframe and
+#' parse the correct tree structure that the JavaScript library expects.
+#'
+#' @param txt A string of text
+#' @param width,height Must be a valid CSS unit (like \code{'100\%'},
+#'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
+#'   string and have \code{'px'} appended.
+#' @param elementId Explicitly provide an element ID to the widget rather than
+#' an automatically generated one. This is optional.
 #'
 #' @import htmlwidgets
+#' @source https://github.com/allenai/hierplane
 #'
 #' @export
-hierplane <- function(tree, width = NULL, height = NULL, elementId = NULL) {
+hierplane <- function(txt, width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
   x = list(
-    tree = tree
+    tree = build_tree(txt)
   )
 
   # create widget
