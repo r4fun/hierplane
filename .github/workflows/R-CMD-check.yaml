@@ -21,7 +21,7 @@ jobs:
           system("wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh")
           system("bash miniconda.sh -b -p $HOME/miniconda")
           system("rm miniconda.sh")
-          system("export PATH='$HOME/miniconda/bin:$PATH')
+          system("export PATH='$HOME/miniconda/bin:$PATH'")
           system("hash -r")
           system("conda config --set always_yes yes --set changeps1 no")
           system("conda update -q conda")
