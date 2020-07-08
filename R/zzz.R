@@ -1,4 +1,6 @@
-.onLoad <- function(libname, pkgname){
-  message("Welcome to hierplane! This package depends on {spacyr}.")
-  message("* For installation information, see: https://github.com/quanteda/spacyr")
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage(
+    "Welcome to hierplane! This package depends on {spacyr}.\n",
+    "* To get started, see: https://github.com/quanteda/spacyr"
+  )
 }

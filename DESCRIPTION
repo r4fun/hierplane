@@ -5,9 +5,9 @@ Authors@R:
     person(given = "Tyler",
            family = "Littlefield",
            role = c("aut", "cre"),
-           email = "tylurp1@gmail.com")
+           email = "tylerlittlefield@hey.com")
 Description: What the package does (one paragraph).
-License: MIT + file LICENSE
+License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -17,6 +17,7 @@ BugReports: https://github.com/tyluRp/hierplane/issues
 Imports: 
     htmlwidgets,
     stringr,
-    spacyr
+    spacyr,
+    jsonlite
 Suggests: 
     testthat
