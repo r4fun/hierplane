@@ -7,6 +7,8 @@
 
 <!-- badges: end -->
 
+:warning: Work in progress :warning:
+
 The goal of `hierplane` is to visualize tokenized, parsed, and annotated
 tokens returned by calling `spacyr::spacy_parse()`. This is an
 htmlwidget that was made possible thanks to the original javascript
@@ -60,3 +62,10 @@ shinyApp(ui, server)
 ```
 
 <img src="man/figures/hierplane-example.png" width="100%" />
+
+## Acknowledgements
+
+  - [`allenai/hierplane`](https://github.com/allenai/hierplane): The
+    original javascript library that this package uses
+  - [`DeNeutoy/spacy-vis`](https://github.com/DeNeutoy/spacy-vis): Spacy
+    models using hierplane

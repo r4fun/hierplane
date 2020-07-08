@@ -7,7 +7,7 @@
 https://github.com/allenai/hierplane
 }
 \usage{
-hierplane(txt, width = NULL, height = NULL, elementId = NULL)
+hierplane(txt, theme = "light", width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
 \item{txt}{A string of text}
