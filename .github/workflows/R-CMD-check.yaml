@@ -18,6 +18,7 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
+          system("sudo chown 501:20 /usr/local/miniconda/pkgs/cache/b89cf7bf.json")
           spacyr::spacy_install(prompt = FALSE, pip = TRUE)
           spacyr::spacy_initialize()
         shell: Rscript {0}
