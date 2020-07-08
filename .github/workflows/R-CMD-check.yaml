@@ -18,7 +18,7 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
-          spacyr::spacy_install_virtualenv(prompt = FALSE)
+          spacyr::spacy_install(prompt = FALSE, pip = TRUE)
           spacyr::spacy_initialize()
         shell: Rscript {0}
       - name: Check
