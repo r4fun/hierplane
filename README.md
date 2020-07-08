@@ -32,8 +32,9 @@ Rendering a hierplane is as simple as providing a string of text:
 ``` r
 library(hierplane)
 
-# initilize spacy
-spacyr::spacy_initialize()
+# initilize spacy if you need 
+# (e.g. RETICULATE_PYTHON isn't already pointing to the spacy_condaenv in your .Renviron)
+# spacyr::spacy_initialize()
 
 # render in the RStudio viewer
 hierplane("Welcome to hierplane")
@@ -45,16 +46,13 @@ And with shiny you just need to use the output and render functions:
 library(hierplane)
 library(shiny)
 
-# initilize spacy
-spacyr::spacy_initialize()
-
 ui <- fluidPage(
   hierplaneOutput("hplane")
 )
 
 server <- function(input, output, session) {
   output$hplane <- renderHierplane({
-    hierplane("Welcome to hierplane")
+    hierplane("Sam likes boats")
   })
 }
 

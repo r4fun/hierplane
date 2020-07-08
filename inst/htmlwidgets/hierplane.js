@@ -6,12 +6,13 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
+    var elementId = "#" + el.id;
+
     return {
 
-      renderValue: function(x) {
-        // tree object, json
-        const tree = x.tree;
-        hierplane.renderTree(tree);
+      renderValue: function(x, el) {
+
+        hierplane.renderTree(x.tree, { target: elementId, theme: x.theme });
 
       },
 
