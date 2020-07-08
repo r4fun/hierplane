@@ -16,11 +16,12 @@
 #' @source https://github.com/allenai/hierplane
 #'
 #' @export
-hierplane <- function(txt, width = NULL, height = NULL, elementId = NULL) {
+hierplane <- function(txt, theme = "light", width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
   x = list(
-    tree = build_tree(txt)
+    tree = build_tree(txt),
+    theme = theme
   )
 
   # create widget
