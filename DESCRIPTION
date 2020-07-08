@@ -2,10 +2,9 @@ Package: hierplane
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Tyler",
-           family = "Littlefield",
-           role = c("aut", "cre"),
-           email = "tylerlittlefield@hey.com")
+    c(person("Tyler", "Littlefield", email="tylerlittlefield@hey.com", role=c("aut","cre")), 
+      person("Mathida", "Chuk", email="mathidachuk@gmail.com", role=c("aut")),
+      person("AI2", role=c("cph"), comment="Author of included JS/CSS code"))
 Description: What the package does (one paragraph).
 License: Apache License (>= 2.0)
 Encoding: UTF-8
