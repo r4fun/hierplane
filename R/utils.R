@@ -22,40 +22,39 @@ parse_root <- function(x) {
 }
 
 spacy_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
-
-tree <- function(txt, root, children, attributes) {
+spacy_default <- function() {
   list(
-    text = txt,
+    parent_id = "head_token_id",
+    child_id = "token_id",
+    child = "token",
+    node_type = "dep_",
+    link = "dep_",
+    attributes = spacy_attributes())
+}
+
+tree <- function(title, root, children, attributes) {
+  list(
+    text = title,
     root = list(
       nodeType = root$dat$dep_,
       word = root$dat$token,
       attributes = pull_attr(root$dat, attributes),
-      spans = list(pull_word_span(txt, root$dat$token_id)),
+      spans = list(pull_word_span(title, root$dat$token_id)),
       children = children$children)
   )
 }
 
-parse_children <- function(x, txt, root_id) {
-  x <- x[!x$head_token_id == x$token_id, ]
-  x$sort_order <- ifelse(x$head_token_id %in% root_id, 0, 1)
-  x$txt <- txt
-  x <- x[with(x, order(x$sort_order, x$token_id)), ]
+parse_children <- function(x, title, root_id, settings = spacy_default()) {
+  x <- x[!x[[settings$parent_id]] == x[[settings$child_id]], ]
+  x$sort_order <- ifelse(x[[settings$parent_id]] %in% root_id, 0, 1)
+  x$txt <- title
+  x <- x[with(x, order(x$sort_order, x[[settings$child_id]])), ]
   x[c(
-    "head_token_id",
-    "token_id",
-    "doc_id",
-    "sentence_id",
-    "token",
-    "lemma",
-    "pos",
-    "tag",
-    "dep_rel",
-    "entity",
-    "ent_type_",
-    "dep_",
-    "is_currency",
-    "like_url",
-    "like_email",
+    settings$parent_id,
+    settings$child_id,
+    settings$child,
+    settings$link,
+    settings$attributes,
     "sort_order",
     "txt"
   )]

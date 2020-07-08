@@ -1,11 +1,11 @@
-build_tree <- function(txt, attributes = spacy_attributes()) {
-  x <- transform_logical(spacy_df(txt))
+build_tree <- function(x, title, attributes = spacy_attributes()) {
+  # x <- transform_logical(spacy_df(txt))
 
   root <- parse_root(x)
-  children <- build_nodes(parse_children(x, txt, root$id), root$id)
+  children <- build_nodes(parse_children(x, title, root$id), root$id)
 
   jsonlite::toJSON(
-    x = tree(txt, root, children, attributes),
+    x = tree(title, root, children, attributes),
     pretty = TRUE,
     auto_unbox = TRUE
   )

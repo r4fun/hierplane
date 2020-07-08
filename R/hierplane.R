@@ -17,11 +17,11 @@
 #' @source https://github.com/allenai/hierplane
 #'
 #' @export
-hierplane <- function(txt, theme = "light", width = NULL, height = NULL, elementId = NULL) {
+hierplane <- function(x, title = "Hierplane", theme = "light", width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
-  x = list(
-    tree = build_tree(txt),
+  x <- list(
+    tree = build_tree(x, title),
     theme = theme
   )
 
@@ -34,6 +34,11 @@ hierplane <- function(txt, theme = "light", width = NULL, height = NULL, element
     package = 'hierplane',
     elementId = elementId
   )
+}
+
+hierplane_spacy <- function(txt, ...) {
+  x <- transform_logical(spacy_df(txt))
+  hierplane(x = x, title = txt, ...)
 }
 
 #' Shiny bindings for hierplane
