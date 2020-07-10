@@ -1,11 +1,18 @@
 tree <- function(title, root, children, settings) {
+
+  if (settings$type %in% "spacy") {
+    spans <- list(pull_word_span(title, root$dat[[settings$child_id]]))
+  } else {
+    spans <- list(list(start = 0, end = nchar(title)))
+  }
+
   list(
     text = title,
     root = list(
       nodeType = root$dat[[settings$node_type]],
       word = root$dat[[settings$child]],
       attributes = pull_attr(root$dat, settings$attributes),
-      spans = list(pull_word_span(title, root$dat[[settings$child_id]])),
+      spans = spans,
       children = children$children)
   )
 }
@@ -20,16 +27,15 @@ parse_root <- function(x, settings) {
 parse_children <- function(x, title, root_id, settings) {
   x <- x[!x[[settings$parent_id]] == x[[settings$child_id]], ]
   x$sort_order <- ifelse(x[[settings$parent_id]] %in% root_id, 0, 1)
-  x$txt <- title
   x <- x[with(x, order(x$sort_order, x[[settings$child_id]])), ]
   x[c(
     settings$parent_id,
     settings$child_id,
     settings$child,
     settings$link,
+    settings$node_type,
     settings$attributes,
-    "sort_order",
-    "txt"
+    "sort_order"
   )]
 }
 
