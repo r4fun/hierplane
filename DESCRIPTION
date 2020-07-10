@@ -20,3 +20,5 @@ Imports:
     jsonlite
 Suggests: 
     testthat
+Depends: 
+    R (>= 2.10)
