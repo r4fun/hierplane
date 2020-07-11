@@ -7,6 +7,8 @@
 
 [![R build
 status](https://github.com/tyluRp/hierplane/workflows/R-CMD-check/badge.svg)](https://github.com/tyluRp/hierplane/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/tyluRp/hierplane/branch/master/graph/badge.svg)](https://codecov.io/gh/tyluRp/hierplane?branch=master)
 <!-- badges: end -->
 
 :warning: Work in progress :warning:

@@ -7,10 +7,22 @@
 https://github.com/allenai/hierplane
 }
 \usage{
-hierplane(txt, theme = "light", width = NULL, height = NULL, elementId = NULL)
+hierplane(
+  .data,
+  settings,
+  title = "Hierplane",
+  theme = "light",
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+)
 }
 \arguments{
-\item{txt}{A string of text}
+\item{.data}{A dataframe containing hierarchical features.}
+
+\item{settings}{A hierplane settings object.}
+
+\item{title}{The tite of the hierplane.}
 
 \item{theme}{Either light or dark}
 

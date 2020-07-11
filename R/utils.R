@@ -1,3 +1,8 @@
+requireNamespaceQuietStop <- function(package) {
+  if (!requireNamespace(package, quietly = TRUE))
+    stop(paste('package',package,'is required to use this function'), call. = FALSE)
+}
+
 tree <- function(title, root, children, settings) {
 
   if (settings$type %in% "spacy") {
