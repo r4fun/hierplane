@@ -6,7 +6,7 @@ tree <- function(title, root, children, settings) {
     spans <- list(list(start = 0, end = nchar(title)))
   }
 
-  list(
+  tree <- list(
     text = title,
     root = list(
       nodeType = root$dat[[settings$node_type]],
@@ -15,6 +15,22 @@ tree <- function(title, root, children, settings) {
       spans = spans,
       children = children$children)
   )
+
+  if (!is.null(settings$node_type_to_style)) {
+    tree$nodeTypeToStyle <- settings$node_type_to_style
+  }
+
+
+  if (!is.null(settings$link_to_positions)) {
+    tree$linkToPosition <- settings$link_to_positions
+  }
+
+  if (!is.null(settings$link_name_to_label)) {
+    tree$linkNameToLabel <- settings$link_name_to_label
+  }
+
+  tree
+
 }
 
 
@@ -81,23 +97,23 @@ format_styles <- function(x, name) {
 
 }
 
-check_style <- function(x, settings, setting_type, val_col) {
+check_style <- function(x, settings, setting_type, setting_target) {
+
   selected <- settings[[setting_type]]
-  bad_vals <- setdiff(names(selected), x[[settings[[val_col]]]])
+  bad_vals <- setdiff(names(selected), x[[settings[[setting_target]]]])
   bad_settings <- setdiff(unlist(selected), style_options[[setting_type]])
   dupes_vals <- names(selected)[duplicated(names(selected))]
 
   if (length(bad_vals) > 0) {
-    stop(paste(setting_type, "names contain value(s) that is not in",　
-               settings[[val_col]], "column:",
-               paste(bad_vals, collapse = ", ")),
+    warning(paste(setting_type, "names contain value(s) that is not in",
+                  settings[[setting_target]], "column:",
+                  paste(bad_vals, collapse = ", ")),
          call. = F)
   }
 
   if (length(bad_settings) > 0) {
-    stop(paste0(setting_type,
-                " settings contain value(s) that is not in",　
-                "available options:",
+    warning(paste0(setting_type,
+                " settings contain value(s) that is not in available options: ",
                 paste(bad_settings, collapse = ", "),
                 "\nSee `style_options$", setting_type,
                 "` to see all available options."),
@@ -106,10 +122,10 @@ check_style <- function(x, settings, setting_type, val_col) {
   }
 
   if (length(dupes_vals) > 0) {
-    stop(paste(setting_type, "names contain duplicated value(s) from",　
-               settings[[val_col]], "column:",
+    warning(paste(setting_type, "names contain duplicated value(s) from",
+                  settings[[setting_target]], "column:",
                paste(dupes_vals, collapse = ", "),
-               "\n Values must be unique."),
+               "\n Values should be unique."),
          call. = F)
   }
 }
@@ -156,3 +172,4 @@ pull_attr <- function(x, attributes) {
   x <- as.vector(unlist(sapply(attributes, function(i) x[[i]])))
   as.list(x[nchar(x) > 0])
 }
+

@@ -6,6 +6,10 @@ build_tree <- function(x, title, settings) {
                           title = title,
                           settings = settings)
 
+#   check_style(x, settings, "node_type_to_style", "node_type")
+#   check_style(x, settings, "link_to_positions", "link")
+#   check_style(x, settings, "link_name_to_label", "link")
+
   jsonlite::toJSON(
     x = tree(title, root, children, settings),
     pretty = TRUE,
