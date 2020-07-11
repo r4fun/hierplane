@@ -39,7 +39,7 @@ tree <- function(title, root, children, settings) {
 }
 
 
-construct_settings <- function(type = "hier",
+hierplane_settings <- function(type = "hier",
                                parent_id = "parent_id",
                                child_id = "child_id",
                                child = "child",
@@ -47,14 +47,8 @@ construct_settings <- function(type = "hier",
                                link = "link",
                                root_tag = "ROOT",
                                attributes = c("attribute1",
-                                              "attribute2"),
-                               node_type_to_style = NULL,
-                               link_to_positions = NULL,
-                               link_name_to_label = NULL) {
+                                              "attribute2")) {
 
-  node_type_to_style <- format_styles(node_type_to_style)
-  link_to_positions <- format_styles(link_to_positions)
-  link_name_to_label <- format_styles(link_name_to_label)
 
   list(
     type = type,
@@ -64,15 +58,26 @@ construct_settings <- function(type = "hier",
     node_type = node_type,
     link = link,
     root_tag = root_tag,
-    attributes = attributes,
-    node_type_to_style = node_type_to_style,
-    link_to_positions = link_to_positions,
-    link_name_to_label = link_name_to_label
+    attributes = attributes
   )
 
 }
 
-format_styles <- function(x, name) {
+add_styles <- function(hierplane_settings,
+                       node_type_to_style = NULL,
+                       link_to_positions = NULL,
+                       link_name_to_label = NULL) {
+
+  hierplane_settings$node_type_to_style <- format_styles(settings, "node_type_to_style")
+  hierplane_settings$link_to_positions <- format_styles(settings, "link_to_positions")
+  hierplane_settings$link_name_to_label <- format_styles(settings, "link_name_to_label")
+
+  hierplane_settings
+}
+
+format_styles <- function(settings, name) {
+
+  x <- settings[[name]]
 
   if (!is.null(x) & length(x) >= 1 ) {
 
@@ -81,6 +86,10 @@ format_styles <- function(x, name) {
       out <- x[, 2]
       names(out) <- x[, 1]
       return(as.list(out))
+
+    } else if ("list" %in% class(x) & name %in% "node_type_to_style") {
+
+      return(lapply(x, function(x) if (!is.list(x)) as.list(x) else x))
 
     } else if ("list" %in% class(x)) {
 
