@@ -1,3 +1,8 @@
+requireNamespaceQuietStop <- function(package) {
+  if (!requireNamespace(package, quietly = TRUE))
+    stop(paste('package',package,'is required to use this function'), call. = FALSE)
+}
+
 tree <- function(title, root, children, settings) {
 
   if (settings$type %in% "spacy") {
@@ -15,29 +20,6 @@ tree <- function(title, root, children, settings) {
       spans = spans,
       children = children$children)
   )
-}
-
-
-construct_settings <- function(type = "hier",
-                               parent_id = "parent_id",
-                               child_id = "child_id",
-                               child = "child",
-                               node_type = "node_type",
-                               link = "link",
-                               root_tag = "ROOT",
-                               attributes = c("attribute1",
-                                              "attribute2")) {
-  list(
-    type = type,
-    parent_id = parent_id,
-    child_id = child_id,
-    child = child,
-    node_type = node_type,
-    link = link,
-    root_tag = root_tag,
-    attributes = attributes
-  )
-
 }
 
 parse_root <- function(x, settings) {
