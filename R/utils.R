@@ -1,70 +1,67 @@
-spacy_df <- function(txt) {
-  spacyr::spacy_parse(
-    x = txt,
-    entity = TRUE,
-    dependency = TRUE,
-    tag = TRUE,
-    additional_attributes = c(
-      "ent_type_",
-      "dep_",
-      "is_currency",
-      "like_url",
-      "like_email"
-    )
-  )
-}
+tree <- function(title, root, children, settings) {
 
-parse_root <- function(x) {
+  if (settings$type %in% "spacy") {
+    spans <- list(pull_word_span(title, root$dat[[settings$child_id]]))
+  } else {
+    spans <- list(list(start = 0, end = nchar(title)))
+  }
+
   list(
-    id = x$token_id[x$dep_rel %in% "ROOT"],
-    dat = x[x$dep_rel %in% "ROOT", ]
-  )
-}
-
-spacy_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
-
-tree <- function(txt, root, children, attributes) {
-  list(
-    text = txt,
+    text = title,
     root = list(
-      nodeType = root$dat$dep_,
-      word = root$dat$token,
-      attributes = pull_attr(root$dat, attributes),
-      spans = list(pull_word_span(txt, root$dat$token_id)),
+      nodeType = root$dat[[settings$node_type]],
+      word = root$dat[[settings$child]],
+      attributes = pull_attr(root$dat, settings$attributes),
+      spans = spans,
       children = children$children)
   )
 }
 
-parse_children <- function(x, txt, root_id) {
-  x <- x[!x$head_token_id == x$token_id, ]
-  x$sort_order <- ifelse(x$head_token_id %in% root_id, 0, 1)
-  x$txt <- txt
-  x <- x[with(x, order(x$sort_order, x$token_id)), ]
+
+construct_settings <- function(type = "hier",
+                               parent_id = "parent_id",
+                               child_id = "child_id",
+                               child = "child",
+                               node_type = "node_type",
+                               link = "link",
+                               root_tag = "ROOT",
+                               attributes = c("attribute1",
+                                              "attribute2")) {
+  list(
+    type = type,
+    parent_id = parent_id,
+    child_id = child_id,
+    child = child,
+    node_type = node_type,
+    link = link,
+    root_tag = root_tag,
+    attributes = attributes
+  )
+
+}
+
+parse_root <- function(x, settings) {
+  list(
+    id = x[x[[settings$link]] %in% settings$root_tag, settings$child_id],
+    dat = x[x[[settings$link]] %in% settings$root_tag, ]
+  )
+}
+
+parse_children <- function(x, title, root_id, settings) {
+  x <- x[!x[[settings$parent_id]] == x[[settings$child_id]], ]
+  x$sort_order <- ifelse(x[[settings$parent_id]] %in% root_id, 0, 1)
+  x <- x[with(x, order(x$sort_order, x[[settings$child_id]])), ]
   x[c(
-    "head_token_id",
-    "token_id",
-    "doc_id",
-    "sentence_id",
-    "token",
-    "lemma",
-    "pos",
-    "tag",
-    "dep_rel",
-    "entity",
-    "ent_type_",
-    "dep_",
-    "is_currency",
-    "like_url",
-    "like_email",
-    "sort_order",
-    "txt"
+    settings$parent_id,
+    settings$child_id,
+    settings$child,
+    settings$link,
+    settings$node_type,
+    settings$attributes,
+    "sort_order"
   )]
 }
 
-get_sents <- function(txt, delims = c(".", "?", "!")) {
-  delims <- paste(paste0("\\", delims), collapse = "|")
-  unlist(strsplit(txt, paste0("(?<=", delims,")\\s(?=[A-Z])"), perl = TRUE))
-}
 
 transform_logical <- function(x) {
   for (bool_col in which(sapply(x, is.logical))) {
@@ -78,23 +75,7 @@ transform_logical <- function(x) {
   x
 }
 
-pull_word_span <- function(txt, word_id) {
-  tokens <- unlist(spacyr::spacy_tokenize(txt), use.names = FALSE)
-  word <- tokens[word_id]
 
-  # present (prevent?) symbol from being interpreted as regex
-  is_punct <- grepl("^[[:punct:]]$", word)
-  if (is_punct) word <- paste0("[", word, "]")
-
-  # count all prior occurrences
-  which_loc <- 1 + stringr::str_count(paste(tokens[1:word_id - 1], collapse = " "), word)
-  word_locs <- stringr::str_locate_all(txt, word)[[1]][which_loc, ]
-
-  list(
-    start = word_locs[["start"]] - 1,
-    end = word_locs[["end"]]
-  )
-}
 
 pull_attr <- function(x, attributes) {
   x <- as.vector(unlist(sapply(attributes, function(i) x[[i]])))

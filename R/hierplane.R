@@ -6,6 +6,7 @@
 #' parse the correct tree structure that the JavaScript library expects.
 #'
 #' @param txt A string of text
+#' @param settings A hierplane settings object.
 #' @param theme Either light or dark
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
@@ -17,11 +18,11 @@
 #' @source https://github.com/allenai/hierplane
 #'
 #' @export
-hierplane <- function(txt, theme = "light", width = NULL, height = NULL, elementId = NULL) {
+hierplane <- function(x, settings, title = "Hierplane", theme = "light", width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
-  x = list(
-    tree = build_tree(txt),
+  x <- list(
+    tree = build_tree(x, title, settings),
     theme = theme
   )
 
@@ -35,6 +36,7 @@ hierplane <- function(txt, theme = "light", width = NULL, height = NULL, element
     elementId = elementId
   )
 }
+
 
 #' Shiny bindings for hierplane
 #'
