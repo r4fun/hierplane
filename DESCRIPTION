@@ -16,7 +16,7 @@ BugReports: https://github.com/tyluRp/hierplane/issues
 Imports: 
     htmlwidgets,
     stringr,
-    spacyr,
     jsonlite
 Suggests: 
-    testthat
+    testthat,
+    covr

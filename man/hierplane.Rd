@@ -7,10 +7,18 @@
 https://github.com/allenai/hierplane
 }
 \usage{
-hierplane(txt, theme = "light", width = NULL, height = NULL, elementId = NULL)
+hierplane(
+  x,
+  settings,
+  title = "Hierplane",
+  theme = "light",
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+)
 }
 \arguments{
-\item{txt}{A string of text}
+\item{settings}{A hierplane settings object.}
 
 \item{theme}{Either light or dark}
 
@@ -20,6 +28,8 @@ string and have \code{'px'} appended.}
 
 \item{elementId}{Explicitly provide an element ID to the widget rather than
 an automatically generated one. This is optional.}
+
+\item{txt}{A string of text}
 }
 \description{
 Hierplanes visualize hierarchical data, specifically tailored towards
