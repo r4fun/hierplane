@@ -32,9 +32,10 @@ settings <- hierplane_settings(attributes = c("height", "age")) %>%
 
 hierplane(a, title = "Family Tree", settings = settings, theme = "dark")
 
-# check styling input and show warnings for potential issues
-library(magrittr) # for pipe
-node_type_to_style <- list("gen1" = c("color1", "strong"),
+# check styling input and show warnings for unmatched values
+# hierplane will still plot, but unmatched are ignored hence the warnings
+# TLDR bad LHS assignments throw warnings
+node_type_to_style <- list("gen1" = c("color1", "strong", "color2"),
                            "gen2" = list("color6"),
                            "gen2" = list("color4"), # repeat label
                            "ext" = list("placeholder"))
@@ -45,6 +46,30 @@ settings <- hierplane_settings(attributes = c("height", "age")) %>%
     node_type_to_style = node_type_to_style,
     link_to_positions = link_to_positions,
     link_name_to_label = link_name_to_label
+  )
+
+hierplane(a, title = "Family Tree", settings = settings, theme = "dark")
+
+# check styling input and throw error mismatched styling options
+# hierplane will fail to plot hence the errors
+# TLDR bad RHS assignments throw errors
+
+## example 1
+node_type_to_style <- list("gen1" = c("color1", "strong", "color2"),
+                           "gen2" = list("colr6"), # bad option
+                           "ext" = list("placeholder"))
+settings <- hierplane_settings(attributes = c("height", "age")) %>%
+  add_styles(
+    node_type_to_style = node_type_to_style
+  )
+
+hierplane(a, title = "Family Tree", settings = settings, theme = "dark")
+
+## example 2
+link_to_positions <- list(cousssssin = "top") # bad option
+settings <- hierplane_settings(attributes = c("height", "age")) %>%
+  add_styles(
+    link_to_positions = link_to_positions
   )
 
 hierplane(a, title = "Family Tree", settings = settings, theme = "dark")

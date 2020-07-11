@@ -102,16 +102,6 @@ check_style <- function(x, settings, setting_type, setting_target) {
          call. = F)
   }
 
-  if (length(bad_settings) > 0 & !setting_type %in% "link_name_to_label") {
-    warning(paste0(setting_type,
-                " settings contain value(s) that is not in available options: ",
-                paste(bad_settings, collapse = ", "),
-                "\nSee `style_options$", setting_type,
-                "` to see all available options."),
-         call. = F
-    )
-  }
-
   if (length(dupes_vals) > 0) {
     warning(paste(setting_type, "names contain duplicated value(s) from",
                   settings[[setting_target]], "column:",
@@ -119,6 +109,17 @@ check_style <- function(x, settings, setting_type, setting_target) {
                "\n Values should be unique."),
          call. = F)
   }
+
+  if (length(bad_settings) > 0 & !setting_type %in% "link_name_to_label") {
+    stop(paste0(setting_type,
+                " settings contain value(s) that is not in available options: ",
+                paste(bad_settings, collapse = ", "),
+                "\nSee `hierplane::style_options$", setting_type,
+                "` to see all available options."),
+         call. = F
+    )
+  }
+
 }
 
 
