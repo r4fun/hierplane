@@ -22,29 +22,6 @@ tree <- function(title, root, children, settings) {
   )
 }
 
-
-construct_settings <- function(type = "hier",
-                               parent_id = "parent_id",
-                               child_id = "child_id",
-                               child = "child",
-                               node_type = "node_type",
-                               link = "link",
-                               root_tag = "ROOT",
-                               attributes = c("attribute1",
-                                              "attribute2")) {
-  list(
-    type = type,
-    parent_id = parent_id,
-    child_id = child_id,
-    child = child,
-    node_type = node_type,
-    link = link,
-    root_tag = root_tag,
-    attributes = attributes
-  )
-
-}
-
 parse_root <- function(x, settings) {
   list(
     id = x[x[[settings$link]] %in% settings$root_tag, settings$child_id],

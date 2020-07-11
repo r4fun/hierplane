@@ -19,4 +19,5 @@ Imports:
     jsonlite
 Suggests: 
     testthat,
-    covr
+    covr,
+    spacyr

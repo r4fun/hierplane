@@ -9,7 +9,7 @@
 hierplane_spacy <- function(txt, settings = spacy_default(), ...) {
   requireNamespaceQuietStop("spacyr")
   x <- transform_logical(spacy_df(txt))
-  hierplane(x = x, settings = settings, title = txt, ...)
+  hierplane(.data = x, settings = settings, title = txt, ...)
 }
 
 spacy_df <- function(txt) {

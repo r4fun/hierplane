@@ -8,7 +8,7 @@ https://github.com/allenai/hierplane
 }
 \usage{
 hierplane(
-  x,
+  .data,
   settings,
   title = "Hierplane",
   theme = "light",
@@ -18,7 +18,11 @@ hierplane(
 )
 }
 \arguments{
+\item{.data}{A dataframe containing hierarchical features.}
+
 \item{settings}{A hierplane settings object.}
+
+\item{title}{The tite of the hierplane.}
 
 \item{theme}{Either light or dark}
 
@@ -28,8 +32,6 @@ string and have \code{'px'} appended.}
 
 \item{elementId}{Explicitly provide an element ID to the widget rather than
 an automatically generated one. This is optional.}
-
-\item{txt}{A string of text}
 }
 \description{
 Hierplanes visualize hierarchical data, specifically tailored towards

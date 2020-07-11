@@ -2,6 +2,7 @@
 
 export(hierplane)
 export(hierplaneOutput)
+export(hierplane_settings)
 export(hierplane_spacy)
 export(renderHierplane)
 import(htmlwidgets)
