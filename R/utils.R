@@ -63,50 +63,27 @@ hierplane_settings <- function(type = "hier",
 
 }
 
-add_styles <- function(hierplane_settings,
+add_styles <- function(settings,
                        node_type_to_style = NULL,
                        link_to_positions = NULL,
                        link_name_to_label = NULL) {
 
-  hierplane_settings$node_type_to_style <- format_styles(settings, "node_type_to_style")
-  hierplane_settings$link_to_positions <- format_styles(settings, "link_to_positions")
-  hierplane_settings$link_name_to_label <- format_styles(settings, "link_name_to_label")
+  settings$node_type_to_style <- format_styles(node_type_to_style, "node_type_to_style")
+  settings$link_to_positions <- format_styles(link_to_positions, "link_to_positions")
+  settings$link_name_to_label <- format_styles(link_name_to_label, "link_name_to_label")
 
-  hierplane_settings
+  settings
 }
 
-format_styles <- function(settings, name) {
+format_styles <- function(x, name) {
 
-  x <- settings[[name]]
+  if (is.null(x)) return(NULL)
+  if (!"list" %in% class(x)) stop(paste(name, "must be a list."), call. = F)
 
-  if (!is.null(x) & length(x) >= 1 ) {
-
-    if ("data.frame" %in% class(x) & length(x) == 2) {
-
-      out <- x[, 2]
-      names(out) <- x[, 1]
-      return(as.list(out))
-
-    } else if ("list" %in% class(x) & name %in% "node_type_to_style") {
-
-      return(lapply(x, function(x) if (!is.list(x)) as.list(x) else x))
-
-    } else if ("list" %in% class(x)) {
-
-      return(x)
-
-    } else if ("data.frame" %in% class(x) & length(x) != 2) {
-
-      stop(paste(name, "input dataframe must have two columns."),
-           call. = F)
-
-    } else {
-
-      stop(paste(name, "must be a list or a dataframe."),
-           call. = F)
-
-    }
-
+  if (name %in% "node_type_to_style") {
+    return(lapply(x, function(x) if (!is.list(x)) as.list(x) else x))
+  } else {
+    return(x)
   }
 
 }
@@ -115,7 +92,7 @@ check_style <- function(x, settings, setting_type, setting_target) {
 
   selected <- settings[[setting_type]]
   bad_vals <- setdiff(names(selected), x[[settings[[setting_target]]]])
-  bad_settings <- setdiff(unlist(selected), style_options[[setting_type]])
+  bad_settings <- setdiff(unlist(selected), hierplane::style_options[[setting_type]])
   dupes_vals <- names(selected)[duplicated(names(selected))]
 
   if (length(bad_vals) > 0) {
@@ -125,7 +102,7 @@ check_style <- function(x, settings, setting_type, setting_target) {
          call. = F)
   }
 
-  if (length(bad_settings) > 0) {
+  if (length(bad_settings) > 0 & !setting_type %in% "link_name_to_label") {
     warning(paste0(setting_type,
                 " settings contain value(s) that is not in available options: ",
                 paste(bad_settings, collapse = ", "),
