@@ -64,7 +64,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-<img src="man/figures/hierplane-example.png" width="100%" />
+<img src="man/figures/hierplane_spacyr.png" width="100%" />
 
 While hierarchical data isn’t common in a `data.frame` centric language
 like R, we are working on a way to parse a `data.frame` to hierplane
@@ -97,7 +97,7 @@ df_dataframe
 #> <hierplane_tree object: from hp_dataframe>
 ```
 
-<img src="man/figures/hierplane-example-dataframe.png" width="100%" />
+<img src="man/figures/hierplane_dataframe.png" width="100%" />
 
 ## Acknowledgements
 

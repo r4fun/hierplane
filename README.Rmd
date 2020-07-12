@@ -68,8 +68,8 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-```{r render-screenshot, echo=FALSE}
-knitr::include_graphics("man/figures/hierplane-example.png", dpi = 400)
+```{r render-screenshot, echo=FALSE, dpi=300}
+knitr::include_graphics("man/figures/hierplane_spacyr.png")
 ```
 
 While hierarchical data isn't common in a `data.frame` centric language like R, we are working on a way to parse a `data.frame` to hierplane ready data. This works by using `hp_dataframe()`:
@@ -100,8 +100,8 @@ df_dataframe <- hp_dataframe(
 df_dataframe
 ```
 
-```{r render-screenshot2, echo=FALSE}
-knitr::include_graphics("man/figures/hierplane-example-dataframe.png", dpi = 400)
+```{r render-screenshot2, echo=FALSE, dpi=300}
+knitr::include_graphics("man/figures/hierplane_dataframe.png")
 ```
 
 ## Acknowledgements
