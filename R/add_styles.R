@@ -5,20 +5,13 @@
 #' Source: \url{https://github.com/allenai/hierplane/}
 "styles"
 
-#' Assign column names to hierplane
+#' Add styles to hierplane settings
 #'
-#' Hierplane requires a specific data structure with things like parent IDs,
-#' child IDs, the root ID, etc. This function requires the user to identify
-#' which columns in their dataframe represent each of these requirements.
-#'
-#' @param type Either `hier` for standard hierplane or `spacy` for a spacy hierplane.
-#' @param parent_id TODO
-#' @param child_id TODO
-#' @param child TODO
-#' @param node_type TODO
-#' @param link TODO
-#' @param root_tag TODO
-#' @param attributes TODO
+#' Append styling options to output of `hierplane_settings()`.
+#' @param settings A list of settings from `hierplane_settings()`
+#' @param node_type_to_style TODO
+#' @param link_to_positions TODO
+#' @param link_name_to_label TODO
 #'
 #' @export
 
