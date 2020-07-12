@@ -30,8 +30,10 @@ devtools::install_github("tyluRp/hierplane")
 
 ## Example
 
-Rendering a hierplane requires you to: 1. Create a hierplane object with
-`hp_` functions 2. Render the hierplane with `hierplane()`
+Rendering a hierplane requires you to:
+
+1.  Create a hierplane object with `hp_` functions
+2.  Render the hierplane with `hierplane()`
 
 A hierplane object can be created from different input data. At the time
 of writing this, a `data.frame` or string:

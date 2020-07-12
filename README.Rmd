@@ -36,6 +36,7 @@ devtools::install_github("tyluRp/hierplane")
 ## Example
 
 Rendering a hierplane requires you to:
+
 1. Create a hierplane object with `hp_` functions
 2. Render the hierplane with `hierplane()`
 
