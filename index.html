@@ -72,7 +72,7 @@
 <!-- badges: start -->
 
 <p><span class="emoji" data-emoji="warning">⚠️</span> Work in progress <span class="emoji" data-emoji="warning">⚠️</span></p>
-<p>The goal of <code>hierplane</code> is to visualize tokenized, parsed, and annotated tokens returned by calling <code><a href="http://spacyr.quanteda.io/reference/spacy_parse.html">spacyr::spacy_parse()</a></code>. This is an htmlwidget that was made possible thanks to the original javascript library: <a href="https://github.com/allenai/hierplane" class="uri">https://github.com/allenai/hierplane</a>.</p>
+<p>The goal of <code>hierplane</code> is to visualize trees. This is an HTML widget that uses source code from the <a href="https://github.com/allenai/hierplane">original javascript library</a>. A handful of functions are provided that allow R users to render hierplanes in shiny.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -81,23 +81,20 @@
 <span class="co"># install.packages("devtools")</span>
 <span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"tyluRp/hierplane"</span>)
 </pre></div>
-<p>Additionally, you will need to set up <code>spacyr</code> to get things working. Please take a look here: <a href="https://github.com/quanteda/spacyr" class="uri">https://github.com/quanteda/spacyr</a>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>Rendering a hierplane is as simple as providing a string of text:</p>
+<p>Rendering a hierplane requires you to: 1. Create a hierplane object with <code>hp_</code> functions 2. Render the hierplane with <code><a href="reference/hierplane.html">hierplane()</a></code></p>
+<p>A hierplane object can be created from different input data. At the time of writing this, a <code>data.frame</code> or string:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tyluRp/hierplane">hierplane</a></span>)
 
-<span class="co"># initilize spacy if you need </span>
-<span class="co"># (e.g. RETICULATE_PYTHON isn't already pointing to the spacy_condaenv in your .Renviron)</span>
-<span class="co"># spacyr::spacy_initialize()</span>
-
-<span class="co"># render in the RStudio viewer</span>
-<span class="fu"><a href="reference/hierplane.html">hierplane</a></span>(<span class="st">"Welcome to hierplane"</span>)
+<span class="co"># requires spacyr package</span>
+<span class="fu"><a href="reference/hp_spacyr.html">hp_spacyr</a></span>(<span class="st">"Sam likes boats"</span>)
+<span class="co">#&gt; &lt;hierplane_tree object: from hp_spacyr&gt;</span>
 </pre></div>
-<p>And with shiny you just need to use the output and render functions:</p>
+<p>With this, we can render a hierplane in shiny:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tyluRp/hierplane">hierplane</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">shiny</span>)
@@ -108,13 +105,42 @@
 
 <span class="kw">server</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">input</span>, <span class="kw">output</span>, <span class="kw">session</span>) {
   <span class="kw">output</span><span class="op">$</span><span class="kw">hplane</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hierplane-shiny.html">renderHierplane</a></span>({
-    <span class="fu"><a href="reference/hierplane.html">hierplane</a></span>(<span class="st">"Sam likes boats"</span>)
+    <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hp_spacyr.html">hp_spacyr</a></span>(<span class="st">"Sam likes boats"</span>)
+    <span class="fu"><a href="reference/hierplane.html">hierplane</a></span>(<span class="kw">x</span>)
   })
 }
 
 <span class="fu">shinyApp</span>(<span class="kw">ui</span>, <span class="kw">server</span>)
 </pre></div>
 <p><img src="reference/figures/hierplane-example.png" width="100%"></p>
+<p>While hierarchical data isn’t common in a <code>data.frame</code> centric language like R, we are working on a way to parse a <code>data.frame</code> to hierplane ready data. This works by using <code><a href="reference/hp_dataframe.html">hp_dataframe()</a></code>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    parent_id = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Bob"</span>),
+    child_id = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Eliza"</span>, <span class="st">"Peggy"</span>, <span class="st">"John"</span>, <span class="st">"Jess"</span>),
+    child = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Eliza"</span>, <span class="st">"Peggy"</span>, <span class="st">"John"</span>, <span class="st">"Jess"</span>),
+    node_type = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"gen1"</span>, <span class="st">"gen2"</span>, <span class="st">"gen2"</span>, <span class="st">"gen2"</span>, <span class="st">"gen3"</span>, <span class="st">"ext"</span>),
+    link = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ROOT"</span>, <span class="st">"daughter"</span>, <span class="st">"daughter"</span>, <span class="st">"daughter"</span>, <span class="st">"son"</span>, <span class="st">"cousin"</span>),
+    height = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"100 cm"</span>, <span class="st">"100 cm"</span>, <span class="st">"90 cm"</span>, <span class="st">"50 cm"</span>, <span class="st">"10 cm"</span>, <span class="st">"70 cm"</span>),
+    age = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"60 yo"</span>, <span class="st">"30 yo"</span>, <span class="st">"25 yo"</span>, <span class="st">"10 yo"</span>, <span class="st">"0.5 yo"</span>, <span class="st">"150 yo"</span>)
+  ),
+  row.names = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="op">-</span><span class="fl">6L</span>),
+  class = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"data.frame"</span>)
+)
+
+<span class="kw">df_dataframe</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hp_dataframe.html">hp_dataframe</a></span>(
+  .data = <span class="kw">df</span>,
+  title = <span class="st">"Family"</span>,
+  settings = <span class="fu"><a href="reference/hierplane_settings.html">hierplane_settings</a></span>(
+    attributes = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"height"</span>, <span class="st">"age"</span>)
+  )
+)
+
+<span class="kw">df_dataframe</span>
+<span class="co">#&gt; &lt;hierplane_tree object: from hp_dataframe&gt;</span>
+</pre></div>
+<p><img src="reference/figures/hierplane-example-dataframe.png" width="100%"></p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
