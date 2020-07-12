@@ -4,14 +4,14 @@
 \alias{hp_dataframe}
 \title{Create a hierplane object from dataframe}
 \usage{
-hp_dataframe(.data, title, settings)
+hp_dataframe(.data, settings, title = "Hierplane")
 }
 \arguments{
 \item{.data}{A dataframe with valid hierachical features (child_id, parent_id, etc.).}
 
-\item{title}{A title, defaults to "Hierplane", this serves as the header/title of the hierplane.}
-
 \item{settings}{Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.}
+
+\item{title}{A title, defaults to "Hierplane", this serves as the header/title of the hierplane.}
 }
 \description{
 Creating a hierplane object from a dataframe requires a bit more work because

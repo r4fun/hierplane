@@ -31,7 +31,7 @@ build_nodes <- function(x, root, title, settings) {
   r$attributes <- pull_attr(cur_tib, settings$attributes)
   r$link <- cur_tib[[settings$link]]
 
-  if (settings$type %in% "spacy" & !is.null(r$word) & length(r$word) > 0) {
+  if (settings$type %in% "spacyr" & !is.null(r$word) & length(r$word) > 0) {
     r$spans <- list(pull_word_span(title, cur_tib[[settings$child_id]]))
   }
 

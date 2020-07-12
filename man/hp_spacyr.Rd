@@ -4,10 +4,14 @@
 \alias{hp_spacyr}
 \title{Create a hierplane object using spacyr}
 \usage{
-hp_spacyr(.data)
+hp_spacyr(.data, settings = spacyr_default(), ...)
 }
 \arguments{
 \item{.data}{A string of text.}
+
+\item{settings}{Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.}
+
+\item{...}{Additional parameters to pass to \code{spacyr::spacy_parse}}
 }
 \description{
 Creating a hierplane object from a string is possible by using the \code{spacyr}
