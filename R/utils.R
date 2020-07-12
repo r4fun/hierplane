@@ -40,7 +40,7 @@ tree <- function(title, root, children, settings) {
 
 parse_root <- function(x, settings) {
   list(
-    id = x[x[[settings$link]] %in% settings$root_tag, settings$child_id],
+    id = x[x[[settings$link]] %in% settings$root_tag, ][[settings$child_id]],
     dat = x[x[[settings$link]] %in% settings$root_tag, ]
   )
 }
