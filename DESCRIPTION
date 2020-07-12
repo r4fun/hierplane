@@ -6,6 +6,7 @@ Authors@R:
       person("Mathida", "Chuk", email="mathidachuk@gmail.com", role=c("aut")),
       person("AI2", role=c("cph"), comment="Author of included JS/CSS code"))
 Description: What the package does (one paragraph).
+Depends: R (>= 2.10)
 License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
