@@ -24,7 +24,7 @@ build_nodes <- function(x, root, title, settings) {
 
   r <- list()
 
-  cur_tib <- x[x[, settings$child_id] == root,]
+  cur_tib <- x[x[[settings$child_id]] == root, ]
 
   r$nodeType <- cur_tib[[settings$node_type]]
   r$word <- cur_tib[[settings$child]]
@@ -35,7 +35,7 @@ build_nodes <- function(x, root, title, settings) {
     r$spans <- list(pull_word_span(title, cur_tib[[settings$child_id]]))
   }
 
-  children <- x[x[, settings$parent_id] == root, 2]
+  children <- x[x[[settings$parent_id]] == root, ][[settings$child_id]]
 
   if (is.factor(children))
     children <- as.character(children)
