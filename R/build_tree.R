@@ -8,7 +8,7 @@ build_tree <- function(x, title = NULL, settings = NULL) {
   children <- build_nodes(parse_children(x, title, root$id, settings),
                           root = root$id,
                           title = title,
-                          settings = settings)
+                          settings = settings)$children
 
   jsonlite::toJSON(
     x = tree(title, root, children, settings),
@@ -18,6 +18,8 @@ build_tree <- function(x, title = NULL, settings = NULL) {
 }
 
 build_nodes <- function(x, root, title, settings) {
+
+  if (nrow(x) == 0 | is.null(x)) return(NULL)
 
   if (is.factor(root))
     root <- as.character(root)

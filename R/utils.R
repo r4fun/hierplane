@@ -17,9 +17,12 @@ tree <- function(title, root, children, settings) {
       nodeType = root$dat[[settings$node_type]],
       word = root$dat[[settings$child]],
       attributes = pull_attr(root$dat, settings$attributes),
-      spans = spans,
-      children = children$children)
+      spans = spans)
   )
+
+  if (!is.null(children)) {
+    tree$root$children <- children
+  }
 
   if (!is.null(settings$node_type_to_style)) {
     tree$nodeTypeToStyle <- settings$node_type_to_style
