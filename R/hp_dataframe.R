@@ -12,5 +12,5 @@
 #' @export
 hp_dataframe <- function(.data, settings, title = "Hierplane") {
   x <- build_tree(.data, title, settings)
-  structure(x, class = c("hierplane", "hierplane_dataframe", class(x)))
+  structure(x, class = c("hierplane_tree", "hierplane_dataframe", class(x)))
 }
