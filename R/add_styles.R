@@ -44,7 +44,7 @@ check_style <- function(x, settings, setting_type, setting_target) {
 
   selected <- settings[[setting_type]]
   bad_vals <- setdiff(names(selected), x[[settings[[setting_target]]]])
-  bad_settings <- setdiff(unlist(selected), style[[setting_type]])
+  bad_settings <- setdiff(unlist(selected), styles[[setting_type]])
   dupes_vals <- names(selected)[duplicated(names(selected))]
 
   if (length(bad_vals) > 0) {
