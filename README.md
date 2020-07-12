@@ -16,7 +16,9 @@ coverage](https://codecov.io/gh/tyluRp/hierplane/branch/master/graph/badge.svg)]
 The goal of `hierplane` is to visualize trees. This is an HTML widget
 that uses source code from the [original javascript
 library](https://github.com/allenai/hierplane). A handful of functions
-are provided that allow R users to render hierplanes in shiny.
+are provided that allow R users to render hierplanes in shiny. See a
+live demonstration
+[here](https://tylerlittlefield.com/shiny/tyler/hierplane/).
 
 ## Installation
 
