@@ -11,7 +11,7 @@ tree <- function(title, root, children, settings) {
     spans <- list(list(start = 0, end = nchar(title)))
   }
 
-  list(
+  tree <- list(
     text = title,
     root = list(
       nodeType = root$dat[[settings$node_type]],
@@ -20,6 +20,22 @@ tree <- function(title, root, children, settings) {
       spans = spans,
       children = children$children)
   )
+
+  if (!is.null(settings$node_type_to_style)) {
+    tree$nodeTypeToStyle <- settings$node_type_to_style
+  }
+
+
+  if (!is.null(settings$link_to_positions)) {
+    tree$linkToPosition <- settings$link_to_positions
+  }
+
+  if (!is.null(settings$link_name_to_label)) {
+    tree$linkNameToLabel <- settings$link_name_to_label
+  }
+
+  tree
+
 }
 
 parse_root <- function(x, settings) {
@@ -63,3 +79,4 @@ pull_attr <- function(x, attributes) {
   x <- as.vector(unlist(sapply(attributes, function(i) x[[i]])))
   as.list(x[nchar(x) > 0])
 }
+

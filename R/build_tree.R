@@ -1,5 +1,9 @@
 build_tree <- function(x, title, settings) {
 
+  check_style(x, settings, "node_type_to_style", "node_type")
+  check_style(x, settings, "link_to_positions", "link")
+  check_style(x, settings, "link_name_to_label", "link")
+
   root <- parse_root(x, settings)
   children <- build_nodes(parse_children(x, title, root$id, settings),
                           root = root$id,
