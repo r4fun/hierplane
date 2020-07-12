@@ -1,15 +1,21 @@
-#' Render a Hierplane from Text using Spacy
-#' @param txt A sentence to be parsed and rendered as hierplane
-#' @param settings A hierplane settings object.
-#' @param ... Parameters to pass to `hierplane()`
+#' Create a hierplane object using spacyr
 #'
+#' Creating a hierplane object from a string is possible by using the `spacyr`
+#' package. More specifically, we rely on `spacyr::spacy_parse()` to tokenize and
+#' tag the string provided. Note that this functionality requires the `spacyr`
+#' package.
+#'
+#' @param .data A string of text.
 #' @md
-#'
 #' @export
-hierplane_spacy <- function(txt, settings = spacy_default(), ...) {
+hp_spacyr <- function(.data) {
   requireNamespaceQuietStop("spacyr")
-  x <- transform_logical(spacy_df(txt))
-  hierplane(.data = x, settings = settings, title = txt, ...)
+  x <- build_tree(
+    x = transform_logical(spacy_df(.data)),
+    title = .data,
+    settings = spacy_default()
+  )
+  structure(x, class = c("hierplane", "hierplane_spacyr", class(x)))
 }
 
 spacy_df <- function(txt) {

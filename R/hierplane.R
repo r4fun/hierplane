@@ -1,13 +1,10 @@
+
 #' Render a hierplane
 #'
-#' Hierplanes visualize hierarchical data, specifically tailored towards
-#' rendering dependency parses. The user only needs to provide a string of text.
-#' Hierplane will call on `spacyr::spacy_parse()` to generate a dataframe and
-#' parse the correct tree structure that the JavaScript library expects.
+#' Hierplanes visualize hierarchical data. The `.data` param expects a hierplane
+#' object created by various inputs using the `hp_` family of functions.
 #'
 #' @param .data A dataframe containing hierarchical features.
-#' @param settings A hierplane settings object.
-#' @param title The tite of the hierplane.
 #' @param theme Either light or dark
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
@@ -19,11 +16,11 @@
 #' @source https://github.com/allenai/hierplane
 #'
 #' @export
-hierplane <- function(.data, settings, title = "Hierplane", theme = "light", width = NULL, height = NULL, elementId = NULL) {
-
+hierplane <- function(.data, theme = "light", width = NULL, height = NULL,
+                      elementId = NULL) {
   # forward options using x
   x <- list(
-    tree = build_tree(.data, title, settings),
+    tree = .data,
     theme = theme
   )
 
@@ -37,7 +34,6 @@ hierplane <- function(.data, settings, title = "Hierplane", theme = "light", wid
     elementId = elementId
   )
 }
-
 
 #' Shiny bindings for hierplane
 #'

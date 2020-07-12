@@ -1,4 +1,4 @@
-build_tree <- function(x, title, settings) {
+build_tree <- function(x, title = NULL, settings = NULL) {
 
   check_style(x, settings, "node_type_to_style", "node_type")
   check_style(x, settings, "link_to_positions", "link")

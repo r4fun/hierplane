@@ -9,8 +9,6 @@ https://github.com/allenai/hierplane
 \usage{
 hierplane(
   .data,
-  settings,
-  title = "Hierplane",
   theme = "light",
   width = NULL,
   height = NULL,
@@ -19,10 +17,6 @@ hierplane(
 }
 \arguments{
 \item{.data}{A dataframe containing hierarchical features.}
-
-\item{settings}{A hierplane settings object.}
-
-\item{title}{The tite of the hierplane.}
 
 \item{theme}{Either light or dark}
 
@@ -34,8 +28,6 @@ string and have \code{'px'} appended.}
 an automatically generated one. This is optional.}
 }
 \description{
-Hierplanes visualize hierarchical data, specifically tailored towards
-rendering dependency parses. The user only needs to provide a string of text.
-Hierplane will call on \code{spacyr::spacy_parse()} to generate a dataframe and
-parse the correct tree structure that the JavaScript library expects.
+Hierplanes visualize hierarchical data. The \code{.data} param expects a hierplane
+object created by various inputs using the \code{hp_} family of functions.
 }
