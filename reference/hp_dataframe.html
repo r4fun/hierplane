@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hierplane</title>
+<title>Create a hierplane object from dataframe — hp_dataframe • hierplane</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create a hierplane object from dataframe — hp_dataframe" />
+<meta property="og:description" content="Creating a hierplane object from a dataframe requires a bit more work because
+we need input from the user to construct valid JSON. Construction requires the
+user to provide a dataframe, title, and a list of settings." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,78 +108,40 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create a hierplane object from dataframe</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/hp_dataframe.R'><code>R/hp_dataframe.R</code></a></small>
+    <div class="hidden name"><code>hp_dataframe.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Creating a hierplane object from a dataframe requires a bit more work because
+we need input from the user to construct valid JSON. Construction requires the
+user to provide a dataframe, title, and a list of settings.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hierplane/man/hp_dataframe.html'>hp_dataframe</a></span>(<span class='kw'>.data</span>, <span class='kw'>settings</span>, title = <span class='st'>"Hierplane"</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="add_styles.html">add_styles()</a></code> </p>
-        </td>
-        <td><p>Add styles to hierplane settings</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hierplane-shiny.html">hierplaneOutput()</a></code> <code><a href="hierplane-shiny.html">renderHierplane()</a></code> </p>
-        </td>
-        <td><p>Shiny bindings for hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hierplane.html">hierplane()</a></code> </p>
-        </td>
-        <td><p>Render a hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hierplane_settings.html">hierplane_settings()</a></code> </p>
-        </td>
-        <td><p>Assign column names to hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hp_dataframe.html">hp_dataframe()</a></code> </p>
-        </td>
-        <td><p>Create a hierplane object from dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hp_spacyr.html">hp_spacyr()</a></code> </p>
-        </td>
-        <td><p>Create a hierplane object using spacyr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="styles.html">styles</a></code> </p>
-        </td>
-        <td><p>List of all available styles</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>A dataframe with valid hierachical features (child_id, parent_id, etc.).</p></td>
+    </tr>
+    <tr>
+      <th>settings</th>
+      <td><p>Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>A title, defaults to "Hierplane", this serves as the header/title of the hierplane.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

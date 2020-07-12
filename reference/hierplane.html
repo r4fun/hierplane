@@ -40,10 +40,8 @@
 
 
 <meta property="og:title" content="Render a hierplane — hierplane" />
-<meta property="og:description" content="Hierplanes visualize hierarchical data, specifically tailored towards
-rendering dependency parses. The user only needs to provide a string of text.
-Hierplane will call on spacyr::spacy_parse() to generate a dataframe and
-parse the correct tree structure that the JavaScript library expects." />
+<meta property="og:description" content="Hierplanes visualize hierarchical data. The .data param expects a hierplane
+object created by various inputs using the hp_ family of functions." />
 
 
 
@@ -117,16 +115,12 @@ parse the correct tree structure that the JavaScript library expects." />
     </div>
 
     <div class="ref-description">
-    <p>Hierplanes visualize hierarchical data, specifically tailored towards
-rendering dependency parses. The user only needs to provide a string of text.
-Hierplane will call on <code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> to generate a dataframe and
-parse the correct tree structure that the JavaScript library expects.</p>
+    <p>Hierplanes visualize hierarchical data. The <code>.data</code> param expects a hierplane
+object created by various inputs using the <code>hp_</code> family of functions.</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hierplane/man/hierplane.html'>hierplane</a></span>(
   <span class='kw'>.data</span>,
-  <span class='kw'>settings</span>,
-  title = <span class='st'>"Hierplane"</span>,
   theme = <span class='st'>"light"</span>,
   width = <span class='kw'>NULL</span>,
   height = <span class='kw'>NULL</span>,
@@ -139,14 +133,6 @@ parse the correct tree structure that the JavaScript library expects.</p>
     <tr>
       <th>.data</th>
       <td><p>A dataframe containing hierarchical features.</p></td>
-    </tr>
-    <tr>
-      <th>settings</th>
-      <td><p>A hierplane settings object.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>The tite of the hierplane.</p></td>
     </tr>
     <tr>
       <th>theme</th>
