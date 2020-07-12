@@ -13,10 +13,10 @@ coverage](https://codecov.io/gh/tyluRp/hierplane/branch/master/graph/badge.svg)]
 
 :warning: Work in progress :warning:
 
-The goal of `hierplane` is to visualize tokenized, parsed, and annotated
-tokens returned by calling `spacyr::spacy_parse()`. This is an
-htmlwidget that was made possible thanks to the original javascript
-library: <https://github.com/allenai/hierplane>.
+The goal of `hierplane` is to visualize trees. This is an HTML widget
+that uses source code from the [original javascript
+library](https://github.com/allenai/hierplane). A handful of functions
+are provided that allow R users to render hierplanes in shiny.
 
 ## Installation
 
@@ -28,25 +28,23 @@ You can install the development version from
 devtools::install_github("tyluRp/hierplane")
 ```
 
-Additionally, you will need to set up `spacyr` to get things working.
-Please take a look here: <https://github.com/quanteda/spacyr>.
-
 ## Example
 
-Rendering a hierplane is as simple as providing a string of text:
+Rendering a hierplane requires you to: 1. Create a hierplane object with
+`hp_` functions 2. Render the hierplane with `hierplane()`
+
+A hierplane object can be created from different input data. At the time
+of writing this, a `data.frame` or string:
 
 ``` r
 library(hierplane)
 
-# initilize spacy if you need 
-# (e.g. RETICULATE_PYTHON isn't already pointing to the spacy_condaenv in your .Renviron)
-# spacyr::spacy_initialize()
-
-# render in the RStudio viewer
-hierplane("Welcome to hierplane")
+# requires spacyr package
+hp_spacyr("Sam likes boats")
+#> <hierplane_tree object: from hp_spacyr>
 ```
 
-And with shiny you just need to use the output and render functions:
+With this, we can render a hierplane in shiny:
 
 ``` r
 library(hierplane)
@@ -58,7 +56,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$hplane <- renderHierplane({
-    hierplane("Sam likes boats")
+    x <- hp_spacyr("Sam likes boats")
+    hierplane(x)
   })
 }
 
@@ -66,6 +65,39 @@ shinyApp(ui, server)
 ```
 
 <img src="man/figures/hierplane-example.png" width="100%" />
+
+While hierarchical data isn’t common in a `data.frame` centric language
+like R, we are working on a way to parse a `data.frame` to hierplane
+ready data. This works by using `hp_dataframe()`:
+
+``` r
+df <- structure(
+  list(
+    parent_id = c("Bob", "Bob", "Bob", "Bob", "Angelica", "Bob"),
+    child_id = c("Bob", "Angelica", "Eliza", "Peggy", "John", "Jess"),
+    child = c("Bob", "Angelica", "Eliza", "Peggy", "John", "Jess"),
+    node_type = c("gen1", "gen2", "gen2", "gen2", "gen3", "ext"),
+    link = c("ROOT", "daughter", "daughter", "daughter", "son", "cousin"),
+    height = c("100 cm", "100 cm", "90 cm", "50 cm", "10 cm", "70 cm"),
+    age = c("60 yo", "30 yo", "25 yo", "10 yo", "0.5 yo", "150 yo")
+  ),
+  row.names = c(NA, -6L),
+  class = c("data.frame")
+)
+
+df_dataframe <- hp_dataframe(
+  .data = df,
+  title = "Family",
+  settings = hierplane_settings(
+    attributes = c("height", "age")
+  )
+)
+
+df_dataframe
+#> <hierplane_tree object: from hp_dataframe>
+```
+
+<img src="man/figures/hierplane-example-dataframe.png" width="100%" />
 
 ## Acknowledgements
 
