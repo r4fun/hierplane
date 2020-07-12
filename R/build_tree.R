@@ -1,4 +1,4 @@
-build_tree <- function(x, title, settings) {
+build_tree <- function(x, title = NULL, settings = NULL) {
 
   check_style(x, settings, "node_type_to_style", "node_type")
   check_style(x, settings, "link_to_positions", "link")
@@ -31,7 +31,7 @@ build_nodes <- function(x, root, title, settings) {
   r$attributes <- pull_attr(cur_tib, settings$attributes)
   r$link <- cur_tib[[settings$link]]
 
-  if (settings$type %in% "spacy" & !is.null(r$word) & length(r$word) > 0) {
+  if (settings$type %in% "spacyr" & !is.null(r$word) & length(r$word) > 0) {
     r$spans <- list(pull_word_span(title, cur_tib[[settings$child_id]]))
   }
 

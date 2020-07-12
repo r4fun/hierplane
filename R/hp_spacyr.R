@@ -1,18 +1,26 @@
-#' Render a Hierplane from Text using Spacy
-#' @param txt A sentence to be parsed and rendered as hierplane
-#' @param settings A hierplane settings object.
-#' @param ... Parameters to pass to `hierplane()`
+#' Create a hierplane object using spacyr
 #'
+#' Creating a hierplane object from a string is possible by using the `spacyr`
+#' package. More specifically, we rely on `spacyr::spacy_parse()` to tokenize and
+#' tag the string provided. Note that this functionality requires the `spacyr`
+#' package.
+#'
+#' @param .data A string of text.
+#' @param settings Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.
+#' @param ... Additional parameters to pass to `spacyr::spacy_parse`
 #' @md
-#'
 #' @export
-hierplane_spacy <- function(txt, settings = spacy_default(), ...) {
+hp_spacyr <- function(.data, settings = spacyr_default(), ...) {
   requireNamespaceQuietStop("spacyr")
-  x <- transform_logical(spacy_df(txt))
-  hierplane(.data = x, settings = settings, title = txt, ...)
+  x <- build_tree(
+    x = transform_logical(spacyr_df(.data, ...)),
+    title = .data,
+    settings = settings
+  )
+  structure(x, class = c("hierplane_tree", "hierplane_spacyr", class(x)))
 }
 
-spacy_df <- function(txt) {
+spacyr_df <- function(txt, ...) {
   spacyr::spacy_parse(
     x = txt,
     entity = TRUE,
@@ -24,22 +32,23 @@ spacy_df <- function(txt) {
       "is_currency",
       "like_url",
       "like_email"
-    )
+    ),
+    ...
   )
 }
 
-spacy_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
+spacyr_attributes <- function() c("ent_type_", "pos", "is_currency", "like_url", "like_email")
 
-spacy_default <- function() {
+spacyr_default <- function() {
   list(
-    type = "spacy",
+    type = "spacyr",
     parent_id = "head_token_id",
     child_id = "token_id",
     child = "token",
     node_type = "dep_",
     link = "dep_",
     root_tag = "ROOT",
-    attributes = spacy_attributes())
+    attributes = spacyr_attributes())
 }
 
 pull_word_span <- function(txt, word_id) {

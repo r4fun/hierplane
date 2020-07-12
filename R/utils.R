@@ -5,7 +5,7 @@ requireNamespaceQuietStop <- function(package) {
 
 tree <- function(title, root, children, settings) {
 
-  if (settings$type %in% "spacy") {
+  if (settings$type %in% "spacyr") {
     spans <- list(pull_word_span(title, root$dat[[settings$child_id]]))
   } else {
     spans <- list(list(start = 0, end = nchar(title)))
