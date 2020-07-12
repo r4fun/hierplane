@@ -66,7 +66,7 @@ check_style <- function(x, settings, setting_type, setting_target) {
     stop(paste0(setting_type,
                 " settings contain value(s) that is not in available options: ",
                 paste(bad_settings, collapse = ", "),
-                "\nSee `hierplane::style$", setting_type,
+                "\nSee `hierplane::styles$", setting_type,
                 "` to see all available options."),
          call. = F
     )
