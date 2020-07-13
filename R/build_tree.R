@@ -28,10 +28,10 @@ build_nodes <- function(x, root, title, settings) {
 
   cur_tib <- x[x[[settings$child_id]] == root, ]
 
-  r$nodeType <- cur_tib[[settings$node_type]]
-  r$word <- cur_tib[[settings$child]]
-  r$attributes <- pull_attr(cur_tib, settings$attributes)
-  r$link <- cur_tib[[settings$link]]
+  r$nodeType <- unique(cur_tib[[settings$node_type]])
+  r$word <- unique(cur_tib[[settings$child]])
+  r$attributes <- unique(pull_attr(cur_tib, settings$attributes))
+  r$link <- unique(cur_tib[[settings$link]])
 
   if (settings$type %in% "spacyr" & !is.null(r$word) & length(r$word) > 0) {
     r$spans <- list(pull_word_span(title, cur_tib[[settings$child_id]]))
