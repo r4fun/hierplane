@@ -11,4 +11,4 @@
 #' shows the appearances of each starship in the first seven Star Wars movies.
 #'
 #' Source: \url{https://dplyr.tidyverse.org/reference/starwars.html}
-"hp_starwars"
+"starships"

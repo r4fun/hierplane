@@ -71,9 +71,9 @@ starwars_layer2 <- starwars_clean %>%
            link, node_type) %>%
   summarize(attribute2 = list(unique(name)))
 
-hp_starwars <- bind_rows(starwars_root,
-                         starwars_layer0,
-                         starwars_layer1,
-                         starwars_layer2)
+starships <- bind_rows(starwars_root,
+                       starwars_layer0,
+                       starwars_layer1,
+                       starwars_layer2)
 
-usethis::use_data(hp_starwars, overwrite = TRUE)
+usethis::use_data(starships, overwrite = TRUE)
