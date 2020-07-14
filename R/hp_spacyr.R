@@ -6,11 +6,12 @@
 #' package.
 #'
 #' @param .data A string of text.
-#' @param settings Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.
+#' @param settings Assign your dataframes columns to hierplane variables.
+#' @param styles Assign styles to hierplane.
 #' @param ... Additional parameters to pass to `spacyr::spacy_parse`
 #' @md
 #' @export
-hp_spacyr <- function(.data, settings = spacyr_default(), ...) {
+hp_spacyr <- function(.data, settings = spacyr_default(), styles = NULL, ...) {
   requireNamespaceQuietStop("spacyr")
   x <- build_tree(
     x = transform_logical(spacyr_df(.data, ...)),
