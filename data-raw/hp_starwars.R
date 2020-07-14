@@ -62,7 +62,7 @@ starwars_layer1 <- starwars_clean %>%
 
 starwars_layer2 <- starwars_clean %>%
   filter(!starships %in% "unknown") %>%
-  mutate(parent_id = films,
+  mutate(parent_id = episode,
          child_id = starships,
          child = starships,
          link = "ship",
