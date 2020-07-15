@@ -2,10 +2,10 @@
 
 S3method(print,hierplane_dataframe)
 S3method(print,hierplane_spacyr)
-export(add_styles)
 export(hierplane)
 export(hierplaneOutput)
 export(hierplane_settings)
+export(hierplane_styles)
 export(hp_dataframe)
 export(hp_spacyr)
 export(renderHierplane)

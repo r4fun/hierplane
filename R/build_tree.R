@@ -1,8 +1,8 @@
-build_tree <- function(x, title = NULL, settings = NULL) {
+build_tree <- function(x, title, settings, styles) {
 
-  check_style(x, settings, "node_type_to_style", "node_type")
-  check_style(x, settings, "link_to_positions", "link")
-  check_style(x, settings, "link_name_to_label", "link")
+  check_style(x, settings, styles, "node_type_to_style", "node_type")
+  check_style(x, settings, styles, "link_to_positions", "link")
+  check_style(x, settings, styles, "link_name_to_label", "link")
 
   root <- parse_root(x, settings)
   children <- build_nodes(parse_children(x, title, root$id, settings),
@@ -11,7 +11,7 @@ build_tree <- function(x, title = NULL, settings = NULL) {
                           settings = settings)$children
 
   jsonlite::toJSON(
-    x = tree(title, root, children, settings),
+    x = tree(title, root, children, settings, styles),
     pretty = TRUE,
     auto_unbox = TRUE
   )

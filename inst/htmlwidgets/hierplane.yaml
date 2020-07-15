@@ -4,4 +4,6 @@ dependencies:
    version: 0.2.1
    src: htmlwidgets/lib/hierplane-0.2.1
    script: hierplane.min.js
-   stylesheet: hierplane.min.css
+   stylesheet:
+      - hierplane.min.css
+      - hierplane.pink.css

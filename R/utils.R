@@ -3,7 +3,7 @@ requireNamespaceQuietStop <- function(package) {
     stop(paste('package',package,'is required to use this function'), call. = FALSE)
 }
 
-tree <- function(title, root, children, settings) {
+tree <- function(title, root, children, settings, styles) {
 
   if (settings$type %in% "spacyr") {
     spans <- list(pull_word_span(title, root$dat[[settings$child_id]]))
@@ -24,17 +24,17 @@ tree <- function(title, root, children, settings) {
     tree$root$children <- children
   }
 
-  if (!is.null(settings$node_type_to_style)) {
-    tree$nodeTypeToStyle <- settings$node_type_to_style
+  if (!is.null(styles$node_type_to_style)) {
+    tree$nodeTypeToStyle <- styles$node_type_to_style
   }
 
 
-  if (!is.null(settings$link_to_positions)) {
-    tree$linkToPosition <- settings$link_to_positions
+  if (!is.null(styles$link_to_positions)) {
+    tree$linkToPosition <- styles$link_to_positions
   }
 
-  if (!is.null(settings$link_name_to_label)) {
-    tree$linkNameToLabel <- settings$link_name_to_label
+  if (!is.null(styles$link_name_to_label)) {
+    tree$linkNameToLabel <- styles$link_name_to_label
   }
 
   tree
