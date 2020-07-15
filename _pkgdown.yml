@@ -1,0 +1,28 @@
+destination: docs
+template:
+  params:
+    bootswatch: lumen
+
+reference:
+- title: Functions
+  desc: ~
+  contents:
+  - hierplane
+  - renderHierplane
+  - hierplaneOutput
+- title: Hierplane Objects
+  desc: ~
+  contents:
+  - hp_dataframe
+  - hp_spacyr
+- title: Hierplane Configuration
+  desc: ~
+  contents:
+  - hierplane_settings
+  - hierplane_styles
+- title: Data
+  desc: ~
+  contents:
+  - starships
+  - style_options
+
