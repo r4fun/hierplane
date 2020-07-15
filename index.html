@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What the Package Does (One Line, Title Case) • hierplane</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -120,30 +120,17 @@
 <p><img src="reference/figures/hierplane_spacyr.png" width="100%"></p>
 <p>While hierarchical data isn’t common in a <code>data.frame</code> centric language like R, we are working on a way to parse a <code>data.frame</code> to hierplane ready data. This works by using <code><a href="reference/hp_dataframe.html">hp_dataframe()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    parent_id = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Bob"</span>),
-    child_id = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Eliza"</span>, <span class="st">"Peggy"</span>, <span class="st">"John"</span>, <span class="st">"Jess"</span>),
-    child = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Bob"</span>, <span class="st">"Angelica"</span>, <span class="st">"Eliza"</span>, <span class="st">"Peggy"</span>, <span class="st">"John"</span>, <span class="st">"Jess"</span>),
-    node_type = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"gen1"</span>, <span class="st">"gen2"</span>, <span class="st">"gen2"</span>, <span class="st">"gen2"</span>, <span class="st">"gen3"</span>, <span class="st">"ext"</span>),
-    link = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ROOT"</span>, <span class="st">"daughter"</span>, <span class="st">"daughter"</span>, <span class="st">"daughter"</span>, <span class="st">"son"</span>, <span class="st">"cousin"</span>),
-    height = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"100 cm"</span>, <span class="st">"100 cm"</span>, <span class="st">"90 cm"</span>, <span class="st">"50 cm"</span>, <span class="st">"10 cm"</span>, <span class="st">"70 cm"</span>),
-    age = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"60 yo"</span>, <span class="st">"30 yo"</span>, <span class="st">"25 yo"</span>, <span class="st">"10 yo"</span>, <span class="st">"0.5 yo"</span>, <span class="st">"150 yo"</span>)
-  ),
-  row.names = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="op">-</span><span class="fl">6L</span>),
-  class = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"data.frame"</span>)
+<span class="kw">ui</span> <span class="op">&lt;-</span> <span class="fu">fluidPage</span>(
+  <span class="fu"><a href="reference/hierplane-shiny.html">hierplaneOutput</a></span>(<span class="st">"hplane"</span>)
 )
 
-<span class="kw">df_dataframe</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hp_dataframe.html">hp_dataframe</a></span>(
-  .data = <span class="kw">df</span>,
-  title = <span class="st">"Family"</span>,
-  settings = <span class="fu"><a href="reference/hierplane_settings.html">hierplane_settings</a></span>(
-    attributes = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"height"</span>, <span class="st">"age"</span>)
-  )
-)
+<span class="kw">server</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">input</span>, <span class="kw">output</span>, <span class="kw">session</span>) {
+  <span class="kw">output</span><span class="op">$</span><span class="kw">hplane</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hierplane-shiny.html">renderHierplane</a></span>({
+    <span class="fu"><a href="reference/hierplane.html">hierplane</a></span>(<span class="fu"><a href="reference/hp_dataframe.html">hp_dataframe</a></span>(<span class="kw">starships</span>, title = <span class="st">"Starships"</span>))
+  })
+}
 
-<span class="kw">df_dataframe</span>
-<span class="co">#&gt; &lt;hierplane_tree object: from hp_dataframe&gt;</span>
+<span class="fu">shinyApp</span>(<span class="kw">ui</span>, <span class="kw">server</span>)
 </pre></div>
 <p><img src="reference/figures/hierplane_dataframe.png" width="100%"></p>
 </div>

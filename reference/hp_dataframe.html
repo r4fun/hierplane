@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/lumen/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -121,7 +121,12 @@ we need input from the user to construct valid JSON. Construction requires the
 user to provide a dataframe, title, and a list of settings.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hierplane/man/hp_dataframe.html'>hp_dataframe</a></span>(<span class='kw'>.data</span>, <span class='kw'>settings</span>, title = <span class='st'>"Hierplane"</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/hierplane/man/hp_dataframe.html'>hp_dataframe</a></span>(
+  <span class='kw'>.data</span>,
+  title = <span class='st'>"Hierplane"</span>,
+  settings = <span class='fu'><a href='https://rdrr.io/pkg/hierplane/man/hierplane_settings.html'>hierplane_settings</a></span>(),
+  styles = <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,12 +136,16 @@ user to provide a dataframe, title, and a list of settings.</p>
       <td><p>A dataframe with valid hierachical features (child_id, parent_id, etc.).</p></td>
     </tr>
     <tr>
-      <th>settings</th>
-      <td><p>Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.</p></td>
-    </tr>
-    <tr>
       <th>title</th>
       <td><p>A title, defaults to "Hierplane", this serves as the header/title of the hierplane.</p></td>
+    </tr>
+    <tr>
+      <th>settings</th>
+      <td><p>A named list of dataframe columns to hierplane variables generated from <code><a href='https://rdrr.io/pkg/hierplane/man/hierplane_settings.html'>hierplane_settings()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>styles</th>
+      <td><p>Assign styles to hierplane generated from <code><a href='https://rdrr.io/pkg/hierplane/man/hierplane_styles.html'>hierplane_styles()</a></code>.</p></td>
     </tr>
     </table>
 
