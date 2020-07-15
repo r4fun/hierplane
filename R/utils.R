@@ -80,6 +80,6 @@ transform_logical <- function(x) {
 
 pull_attr <- function(x, attributes) {
   x <- as.vector(unlist(sapply(attributes, function(i) x[[i]])))
-  as.list(x[nchar(x) > 0])
+  as.list(x[nchar(x) > 0 & !is.na(x)])
 }
 

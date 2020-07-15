@@ -75,30 +75,17 @@ like R, we are working on a way to parse a `data.frame` to hierplane
 ready data. This works by using `hp_dataframe()`:
 
 ``` r
-df <- structure(
-  list(
-    parent_id = c("Bob", "Bob", "Bob", "Bob", "Angelica", "Bob"),
-    child_id = c("Bob", "Angelica", "Eliza", "Peggy", "John", "Jess"),
-    child = c("Bob", "Angelica", "Eliza", "Peggy", "John", "Jess"),
-    node_type = c("gen1", "gen2", "gen2", "gen2", "gen3", "ext"),
-    link = c("ROOT", "daughter", "daughter", "daughter", "son", "cousin"),
-    height = c("100 cm", "100 cm", "90 cm", "50 cm", "10 cm", "70 cm"),
-    age = c("60 yo", "30 yo", "25 yo", "10 yo", "0.5 yo", "150 yo")
-  ),
-  row.names = c(NA, -6L),
-  class = c("data.frame")
+ui <- fluidPage(
+  hierplaneOutput("hplane")
 )
 
-df_dataframe <- hp_dataframe(
-  .data = df,
-  title = "Family",
-  settings = hierplane_settings(
-    attributes = c("height", "age")
-  )
-)
+server <- function(input, output, session) {
+  output$hplane <- renderHierplane({
+    hierplane(hp_dataframe(starships, title = "Starships"))
+  })
+}
 
-df_dataframe
-#> <hierplane_tree object: from hp_dataframe>
+shinyApp(ui, server)
 ```
 
 <img src="man/figures/hierplane_dataframe.png" width="100%" />
