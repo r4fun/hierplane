@@ -4,12 +4,14 @@
 \alias{hp_spacyr}
 \title{Create a hierplane object using spacyr}
 \usage{
-hp_spacyr(.data, settings = spacyr_default(), ...)
+hp_spacyr(.data, settings = spacyr_default(), styles = NULL, ...)
 }
 \arguments{
 \item{.data}{A string of text.}
 
-\item{settings}{Assign your dataframes columns to hierplane attributes, additionally apply rendering styles.}
+\item{settings}{Assign your dataframes columns to hierplane variables.}
+
+\item{styles}{Assign styles to hierplane.}
 
 \item{...}{Additional parameters to pass to \code{spacyr::spacy_parse}}
 }

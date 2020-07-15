@@ -1,1 +1,1 @@
-utils::globalVariables(c("styles"))
+utils::globalVariables(c("style_options"))
