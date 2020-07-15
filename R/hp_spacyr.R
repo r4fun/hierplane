@@ -16,7 +16,8 @@ hp_spacyr <- function(.data, settings = spacyr_default(), styles = NULL, ...) {
   x <- build_tree(
     x = transform_logical(spacyr_df(.data, ...)),
     title = .data,
-    settings = settings
+    settings = settings,
+    styles = styles
   )
   structure(x, class = c("hierplane_tree", "hierplane_spacyr", class(x)))
 }
