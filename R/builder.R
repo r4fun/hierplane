@@ -1,5 +1,4 @@
-add_root <- function(root,
-                     attribute = NULL) {
+add_root <- function(.data, root, attribute = NULL) {
   out <- data.frame(
     parent_id = root,
     child_id = root,
@@ -14,6 +13,7 @@ add_root <- function(root,
     }
   }
 
+  attr(out, "source") <- .data
   out
 }
 
@@ -28,6 +28,7 @@ add_layer <- function(.data,
                       parent_vals = NULL,
                       node_type_vals = NULL,
                       link_vals = NULL) {
+  source <- attr(.data, "source")
 
   cols <- c(parent_col,
             child_col,
@@ -36,10 +37,7 @@ add_layer <- function(.data,
             attribute_cols)
   cols <- cols[!is.null(cols)]
 
-  clean <- .data %>%
-    select(cols) %>%
-    distinct() %>%
-    transform_logical()
+  clean <- transform_logical(unique(source[cols]))
 
   # set dataframe size by first defining children
   out <- data.frame(child = clean[[child_col]])
@@ -51,7 +49,7 @@ add_layer <- function(.data,
     out$child_id <- clean[[child_col]]
   }
 
-  if (any(duplicated(na.omit(out$child_id)))) {
+  if (any(duplicated(stats::na.omit(out$child_id)))) {
     stop(paste0("Duplicates detected in child_id with different parents. ",
                 "Verify that there are no duplicates in child column or specify a child_id_col with unique values."),
          call. = T)
@@ -94,10 +92,10 @@ add_layer <- function(.data,
     }
   }
 
-  out %>%
-    filter(!is.na(child),
-           !is.na(link),
-           !is.na(node_type))
+  layer <- out[!is.na(out$child) & !is.na(out$link) & !is.na(out$node_type), ]
 
+  out <- vctrs::vec_rbind(.data, layer)
+  attr(out, "source") <- source
+  out
 }
 
