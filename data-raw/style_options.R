@@ -6,6 +6,9 @@ node_styles <- c(
   "color4",
   "color5",
   "color6",
+  "color7",
+  "color8",
+  "color9",
   "strong",
   "seq",
   "placeholder"
