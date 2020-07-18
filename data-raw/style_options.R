@@ -23,7 +23,9 @@ link_positions <- c(
 
 themes <- c(
   "dark",
-  "light"
+  "light",
+  "pink",
+  "grey"
 )
 
 style_options <- list(
