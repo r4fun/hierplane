@@ -20,7 +20,8 @@ Imports:
     jsonlite,
     utils,
     stats,
-    vctrs
+    vctrs,
+    magrittr
 Suggests: 
     testthat,
     covr,
