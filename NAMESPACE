@@ -2,6 +2,7 @@
 
 S3method(print,hierplane_dataframe)
 S3method(print,hierplane_spacyr)
+export("%>%")
 export(hierplane)
 export(hierplaneOutput)
 export(hierplane_settings)
@@ -10,3 +11,4 @@ export(hp_dataframe)
 export(hp_spacyr)
 export(renderHierplane)
 import(htmlwidgets)
+importFrom(magrittr,"%>%")
