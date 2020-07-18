@@ -1,5 +1,4 @@
-add_root <- function(root,
-                     attribute = NULL) {
+add_root <- function(.data, root, attribute = NULL) {
   out <- data.frame(
     parent_id = root,
     child_id = root,
@@ -14,6 +13,7 @@ add_root <- function(root,
     }
   }
 
+  attr(out, "source") <- .data
   out
 }
 
@@ -28,6 +28,7 @@ add_layer <- function(.data,
                       parent_vals = NULL,
                       node_type_vals = NULL,
                       link_vals = NULL) {
+  source <- attr(.data, "source")
 
   cols <- c(parent_col,
             child_col,
@@ -36,7 +37,7 @@ add_layer <- function(.data,
             attribute_cols)
   cols <- cols[!is.null(cols)]
 
-  clean <- .data %>%
+  clean <- source %>%
     select(cols) %>%
     distinct() %>%
     transform_logical()
@@ -94,10 +95,14 @@ add_layer <- function(.data,
     }
   }
 
-  out %>%
-    filter(!is.na(child),
-           !is.na(link),
-           !is.na(node_type))
+  layer <- out %>%
+    filter(
+      !is.na(child),
+      !is.na(link),
+      !is.na(node_type)
+    )
 
+  attr(layer, "source") <- source
+  dplyr::bind_rows(.data, layer)
 }
 
