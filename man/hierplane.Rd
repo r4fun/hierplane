@@ -18,7 +18,7 @@ hierplane(
 \arguments{
 \item{.data}{A dataframe containing hierarchical features.}
 
-\item{theme}{Either light or dark}
+\item{theme}{Either light, dark, grey, or pink.}
 
 \item{width, height}{Must be a valid CSS unit (like \code{'100\%'},
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
