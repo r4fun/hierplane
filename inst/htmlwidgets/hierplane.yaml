@@ -7,3 +7,4 @@ dependencies:
    stylesheet:
       - hierplane.min.css
       - hierplane.pink.css
+      - hierplane.grey.css

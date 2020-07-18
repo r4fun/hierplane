@@ -5,7 +5,7 @@
 #' object created by various inputs using the `hp_` family of functions.
 #'
 #' @param .data A dataframe containing hierarchical features.
-#' @param theme Either light or dark
+#' @param theme Either light, dark, grey, or pink.
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
 #'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 #'   string and have \code{'px'} appended.
