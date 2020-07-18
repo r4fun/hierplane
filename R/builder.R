@@ -37,10 +37,7 @@ add_layer <- function(.data,
             attribute_cols)
   cols <- cols[!is.null(cols)]
 
-  clean <- source %>%
-    select(cols) %>%
-    distinct() %>%
-    transform_logical()
+  clean <- transform_logical(unique(source[cols]))
 
   # set dataframe size by first defining children
   out <- data.frame(child = clean[[child_col]])
@@ -95,12 +92,7 @@ add_layer <- function(.data,
     }
   }
 
-  layer <- out %>%
-    filter(
-      !is.na(child),
-      !is.na(link),
-      !is.na(node_type)
-    )
+  layer <- out[!is.na(out$child) & !is.na(out$link) & !is.na(out$node_type), ]
 
   attr(layer, "source") <- source
   dplyr::bind_rows(.data, layer)
