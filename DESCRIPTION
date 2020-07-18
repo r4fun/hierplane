@@ -18,7 +18,9 @@ Imports:
     htmlwidgets,
     stringr,
     jsonlite,
-    utils
+    utils,
+    stats,
+    vctrs
 Suggests: 
     testthat,
     covr,

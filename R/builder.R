@@ -49,7 +49,7 @@ add_layer <- function(.data,
     out$child_id <- clean[[child_col]]
   }
 
-  if (any(duplicated(na.omit(out$child_id)))) {
+  if (any(duplicated(stats::na.omit(out$child_id)))) {
     stop(paste0("Duplicates detected in child_id with different parents. ",
                 "Verify that there are no duplicates in child column or specify a child_id_col with unique values."),
          call. = T)
@@ -94,7 +94,8 @@ add_layer <- function(.data,
 
   layer <- out[!is.na(out$child) & !is.na(out$link) & !is.na(out$node_type), ]
 
-  attr(layer, "source") <- source
-  dplyr::bind_rows(.data, layer)
+  out <- vctrs::vec_rbind(.data, layer)
+  attr(out, "source") <- source
+  out
 }
 
