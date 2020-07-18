@@ -1,22 +1,68 @@
 .hierplane--theme-pink {
-    --light-plane-text: ;
-    --dark-plane-text: ;
-    --color1: ;
-    --color2: ;
-    --color3: ;
-    --color4: ;
-    --color5: ;
-    --color6: ;
+    --color0: #ee2c49;
+    --color1: #DC4F65;
+    --color2: #F26D83;
+    --color3: #FF8C9F;
+    --color4: #FDA3B2;
+    --color5: #F9B1BD;
+    --color6: #FFCCCB;
+    --color7: #701c1a;
+    --color8: #21b95b;
+    --color9: #2926c4;
+
+    --rounded-cornerssss: .4em;
+
+    --light-plane-text: #fff;
+    --dark-plane-text: #291d1d;
+    --background: #fff;
+    --title-background: #fff;
+    --title-color: #463030;
+    --link-background: #cccbc8;
+    --link-border: #a08484;
+    --link-color: #998e98;
+    --attribute-label: rgba(0, 0, 0, 0.25); /*attribute label normal state*/
+    --hover-border: #5f4e4e;
+    --hover-filter: brightness(125%);
+    --hover-color: #421c1c;
+    --hover-color-rollup: #662c2c;
+    --hover-attribute: #7478a8c2;
+    --hover-glyph: #5c5757c0;
+    --hover-glyph-fill: #b7bad6c2;
+    --focus-filter: hue-rotate(-15deg);
+    --focus-light: rgba(255, 255, 255, 0.7); /*used for focus glyph and attribute label*/
+    --focus-dark: rgba(73, 35, 35, 0.5); /*used for focus attribute label color*/
+    --focus-gradient-color: #e29292;  /*used for gradient on focused nodes*/
+
+    --passage-color: #666;
+    --passage-hover: rgba(236, 236, 236, 0.15);
+    --passage-hover-span: #4d4d4d;
+    --passage-hover-color: #722175; /*text color on hover for slices that are not in focus*/
+    --passage-hover-self: rgba(180, 180, 180, 0.15);
+    --passage-hover-self-color: #2f227e; /*text color on hover for the slice that is in focus*/
+    --passage-press: rgba(218, 218, 218, 0.07);
+    --passage-press-color: #803535; 
+    --passage-press-hover: rgba(180, 180, 180, 0.1);
+    --passage-focus:rgba(180, 180, 180, 0.5);
+    --passage-focus-color: #fff;
+
+    --slice-filter-hover: brightness(120%) opacity(50%);
+    --slice-filter-hover-self: contrast(150%) opacity(70%);
+
+    --slice-filter-pressed: brightness(120%);
+    --slice-filter-pressed-self: brightness(200%);
+
+
 }
 
 .hierplane--theme-pink, .hierplane--theme-pink .pane, .hierplane--theme-pink #passage, .hierplane--theme-pink #main-stage {
-    background: #ffffff
+    background: var(--background)
 }
 
 .hierplane--theme-pink .node__word__tile {
     box-shadow: none;
-    border: .0625em solid #aaaaaa;
-    border-radius: .125em
+    border: .0625em solid var(--title-background);
+    border-radius: var(--rounded-cornerssss) !important
+    
 }
 
 .hierplane--theme-pink .node__word__link .node__word__link__tab {
@@ -24,16 +70,17 @@
 }
 
 .hierplane--theme-pink .node__word__link .node__word__link__tab__svg__fill {
-    fill: #f6f6f6
+    fill: var(--link-background)
 }
 
 .hierplane--theme-pink .node__word__link .node__word__link__tab__svg__stroke {
-    stroke: #aaaaaa
+    stroke: var(--link-border)
 }
 
 .hierplane--theme-pink .node__word__link .node__word__link__label {
-    background: #f6f6f6;
-    border-color: #aaaaaa !important
+    background: var(--link-background) !important;
+    border-color: var(--link-border) !important;
+    color: var(--link-color);
 }
 
 .hierplane--theme-pink .default .node[data-pos='left']:not(.node--encapsulated)>.node__word>.node__word__link .node__word__link__tab, .hierplane--theme-pink .default .node[data-pos='right']:not(.node--encapsulated)>.node__word>.node__word__link .node__word__link__tab, .hierplane--theme-pink .default .node[data-pos='inside']>.node__word>.node__word__link .node__word__link__tab {
@@ -58,15 +105,18 @@
 
 /* attribute label */
 .hierplane--theme-pink .node__word__attrs .node__word__attrs__item {
-    background: rgba(0, 0, 0, 0.25)
+    background: var(--attribute-label)
 }
 
+/* node colors */
 .hierplane--theme-pink .node--color0>.node__word>.node__word__tile {
-    background: #cecece
+    background: var(--color0);
+    color: var(--light-plane-text)
 }
 
 .hierplane--theme-pink .node--color0>.node__word>.node__word__tile:after {
-    background: #dbdbdb
+    background: var(--color0);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color1>.node__word>.node__word__tile {
@@ -74,8 +124,10 @@
     color: var(--light-plane-text)
 }
 
+
 .hierplane--theme-pink .node--color1>.node__word>.node__word__tile:after {
-    background: #83325d
+    background: var(--color1);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color2>.node__word>.node__word__tile {
@@ -84,7 +136,8 @@
 }
 
 .hierplane--theme-pink .node--color2>.node__word>.node__word__tile:after {
-    background: #c51a5e
+    background: var(--color2);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color3>.node__word>.node__word__tile {
@@ -93,7 +146,8 @@
 }
 
 .hierplane--theme-pink .node--color3>.node__word>.node__word__tile:after {
-    background: #fef6f8
+    background: var(--color3);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color4>.node__word>.node__word__tile {
@@ -102,7 +156,8 @@
 }
 
 .hierplane--theme-pink .node--color4>.node__word>.node__word__tile:after {
-    background: #fefdfb
+    background: var(--color4);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color5>.node__word>.node__word__tile {
@@ -111,7 +166,8 @@
 }
 
 .hierplane--theme-pink .node--color5>.node__word>.node__word__tile:after {
-    background: #fefbfe
+    background: var(--color5);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--color6>.node__word>.node__word__tile {
@@ -120,84 +176,151 @@
 }
 
 .hierplane--theme-pink .node--color6>.node__word>.node__word__tile:after {
-    background: #edf8f9
+    background: var(--color6);
+    filter: brightness(125%);
+}
+
+.hierplane--theme-pink .node--color7>.node__word>.node__word__tile {
+    background: var(--color7);
+    color: var(--dark-plane-text)
+}
+
+.hierplane--theme-pink .node--color7>.node__word>.node__word__tile:after {
+    background: var(--color7);
+    filter: brightness(125%);
+}
+
+.hierplane--theme-pink .node--color8>.node__word>.node__word__tile {
+    background: var(--color8);
+    color: var(--dark-plane-text)
+}
+
+.hierplane--theme-pink .node--color8>.node__word>.node__word__tile:after {
+    background: var(--color8);
+    filter: brightness(125%);
+}
+
+.hierplane--theme-pink .node--color9>.node__word>.node__word__tile {
+    background: var(--color9);
+    color: var(--dark-plane-text)
+}
+
+.hierplane--theme-pink .node--color9>.node__word>.node__word__tile:after {
+    background: var(--color9);
+    filter: brightness(125%);
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__tile {
-    border-color: #aeaedd
+    border-color: var(--hover-border);
+    filter: var(--hover-filter)
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__content>.node__word__label span {
-    color: #5050a2
+    color: var(--hover-color);
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__content>.node__word__label span.node__word__label__rollup {
-    color: rgba(80, 80, 162, 0.53)
+    color: var(--hover-color-rollup);
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__content>.node__word__label span.node__word__label__rollup strong {
-    color: #5050a2
+    color: var(--hover-color)
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__content>.node__word__attrs>.node__word__attrs__item {
-    background: rgba(174, 174, 221, 0.7)
+    background: var(--hover-attribute)
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__ui .node__word__ui__glyph {
-    border-color: #aeaedd
+    border-color: var(--hover-glyph)
 }
 
 .hierplane--theme-pink .node--hover>.node__word>.node__word__ui .node__word__ui__glyph .node__word__ui__glyph__svg {
-    fill: rgba(174, 174, 221, 0.5)
+    fill: var(--hover-glyph-fill)
 }
 
-/* plane hover colors */
+/* plane focus colors */
 .hierplane--theme-pink .node--focused>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--color0>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color0>.node__word>.node__word__tile {
-    background: rgba(218, 218, 218, 0.5) !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color0) 100%) !important;
+    border: var(--color0) !important
+    
 }
 
 .hierplane--theme-pink .node--focused.node--color1>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color1>.node__word>.node__word__tile {
-    background: #80c770 !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color1) 100%) !important;
+    border: var(--color1) !important
 }
 
 .hierplane--theme-pink .node--focused.node--color2>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color2>.node__word>.node__word__tile {
-    background: #7eb4f9 !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color2) 100%) !important;
+    border: var(--color2) !important
 }
 
 .hierplane--theme-pink .node--focused.node--color3>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color3>.node__word>.node__word__tile {
-    background: #e6708a !important
+    filter: var(--focus-filter)!important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color3) 100%) !important;
+    border: var(--color3) !important
 }
 
 .hierplane--theme-pink .node--focused.node--color4>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color4>.node__word>.node__word__tile {
-    background: #efb936 !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color4) 100%) !important;
+    border: var(--color4) !important
 }
 
 .hierplane--theme-pink .node--focused.node--color5>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color5>.node__word>.node__word__tile {
-    background: #e36fe1 !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color5) 100%) !important;
+    border: var(--color5) !important
 }
 
 .hierplane--theme-pink .node--focused.node--color6>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color6>.node__word>.node__word__tile {
-    background: #10e1f9 !important
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color6) 100%) !important;
+    border: var(--color6) !important
 }
+
+.hierplane--theme-pink .node--focused.node--color7>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color7>.node__word>.node__word__tile {
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color7) 100%) !important;
+    border: var(--color7) !important
+}
+
+.hierplane--theme-pink .node--focused.node--color8>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color8>.node__word>.node__word__tile {
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color8) 100%) !important;
+    border: var(--color8) !important
+}
+
+.hierplane--theme-pink .node--focused.node--color9>.node__word>.node__word__tile, .hierplane--theme-pink .node--focused.node--hover.node--color9>.node__word>.node__word__tile {
+    filter: var(--focus-filter) !important;
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color9) 100%) !important;
+    border: var(--color9) !important
+}
+
+
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__tile {
     box-shadow: none !important
 }
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__content>.node__word__attrs>.node__word__attrs__item {
-    background: rgba(255, 255, 255, 0.7)
+    background: var(--focus-light)
 }
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__content>.node__word__attrs>.node__word__attrs__item span {
-    color: rgba(180, 180, 180, 0.5)
+    color: var(--focus-dark) !important
 }
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__ui .node__word__ui__glyph {
-    border-color: rgba(255, 255, 255, 0.5)
+    border-color: var(--focus-dark)
 }
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__ui .node__word__ui__glyph .node__word__ui__glyph__svg {
-    fill: rgba(255, 255, 255, 0.5)
+    fill: var(--focus-dark)
 }
 
 .hierplane--theme-pink .node--focused>.node__word>.node__word__ui--toggle:not(.node__word__ui--disabled):hover .node__word__ui__glyph {
@@ -287,7 +410,7 @@
 }
 
 .hierplane--theme-pink #passage textarea, .hierplane--theme-pink #passage p, .hierplane--theme-pink #passage textarea .passage__readonly, .hierplane--theme-pink #passage p .passage__readonly, .hierplane--theme-pink #passage textarea .span-slice__self, .hierplane--theme-pink #passage p .span-slice__self, .hierplane--theme-pink #passage textarea .passage__readonly .span-slice__self, .hierplane--theme-pink #passage p .passage__readonly .span-slice__self, .hierplane--theme-pink #passage textarea .span-slice__ignored, .hierplane--theme-pink #passage p .span-slice__ignored, .hierplane--theme-pink #passage textarea .passage__readonly .span-slice__ignored, .hierplane--theme-pink #passage p .passage__readonly .span-slice__ignored {
-    color: #666
+    color: var(--passage-color)
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice {
@@ -299,152 +422,223 @@
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--hover {
-    background: rgba(236, 236, 236, 0.15)
+    background: var(--passage-hover)
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--hover span {
-    color: #4d4d4d
+    color: var(--passage-hover-color);
+
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--hover>span.span-slice__self {
-    background: rgba(180, 180, 180, 0.15);
-    color: #1a1a1a
+    background: var(--passage-hover-self);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--pressed.span-slice--hover {
-    background: rgba(218, 218, 218, 0.07)
+    background: var(--passage-press);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--pressed.span-slice--hover span {
-    color: #383838
+    color: var(--passage-press-color);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(180, 180, 180, 0.1)
+    background: var(--passage-press-hover)
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--focused>span.span-slice__self {
-    background: rgba(180, 180, 180, 0.5);
-    color: #fff
+    background: var(--passage-focus);
+    color: var(--passage-focus-color) 
 }
 
 /* word highlights */
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color1.span-slice--hover {
-    background: rgba(151, 209, 138, 0.15)
+    background: var(--color1);
+    filter: var(--slice-filter-hover);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color1.span-slice--hover>span.span-slice__self {
-    background: rgba(85, 168, 66, 0.15)
+    background: var(--color1);
+    filter: var(--slice-filter-hover-self);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color1.span-slice--pressed.span-slice--hover {
-    background: rgba(128, 199, 112, 0.07)
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color5) 100%) !important;
+    opacity: .5;
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color1.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(85, 168, 66, 0.1)
+    background: linear-gradient(to bottom, var(--focus-gradient-color) 0, var(--color5) 100%) !important;
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color1.span-slice--focused>span.span-slice__self {
-    background: #55a842
+    background: var(--color1);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color2.span-slice--hover {
-    background: rgba(160, 200, 251, 0.15)
+    background: var(--color2);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color2.span-slice--hover>span.span-slice__self {
-    background: rgba(52, 137, 246, 0.15)
+    background: var(--color2);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color2.span-slice--pressed.span-slice--hover {
-    background: rgba(126, 180, 249, 0.07)
+    background: var(--color2);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color2.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(52, 137, 246, 0.1)
+    background: var(--color2);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color2.span-slice--focused>span.span-slice__self {
-    background: #3489f6
+    background: var(--color2);
 }
 
+
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color3.span-slice--hover {
-    background: rgba(235, 143, 163, 0.15)
+    background: var(--color3);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color3.span-slice--hover>span.span-slice__self {
-    background: rgba(218, 47, 84, 0.15)
+    background: var(--color3);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color3.span-slice--pressed.span-slice--hover {
-    background: rgba(230, 112, 138, 0.07)
+    background: var(--color3);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color3.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(218, 47, 84, 0.1)
+    background: var(--color3);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color3.span-slice--focused>span.span-slice__self {
-    background: #da2f54
+    background: var(--color3);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color4.span-slice--hover {
-    background: rgba(242, 196, 87, 0.15)
+    background: var(--color4);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color4.span-slice--hover>span.span-slice__self {
-    background: rgba(201, 146, 16, 0.15)
+    background: var(--color4);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color4.span-slice--pressed.span-slice--hover {
-    background: rgba(239, 185, 54, 0.07)
+    background: var(--color4);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color4.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(201, 146, 16, 0.1)
+    background: var(--color4);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color4.span-slice--focused>span.span-slice__self {
-    background: #eeb01e
+    background: var(--color4)
 }
 
+
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color5.span-slice--hover {
-    background: rgba(233, 141, 231, 0.15)
+    background: var(--color5);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color5.span-slice--hover>span.span-slice__self {
-    background: rgba(214, 47, 212, 0.15)
+    background: var(--color5);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color5.span-slice--pressed.span-slice--hover {
-    background: rgba(227, 111, 225, 0.07)
+    background: var(--color5);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color5.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(214, 47, 212, 0.1)
+    background: var(--color5);
+    opacity: .05;
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color5.span-slice--focused>span.span-slice__self {
-    background: #d62fd4
+    background: var(--color5);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color6.span-slice--hover {
-    background: rgba(51, 229, 250, 0.15)
+    background: var(--color6);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color6.span-slice--hover>span.span-slice__self {
-    background: rgba(5, 165, 184, 0.15)
+    background: var(--color6);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color6.span-slice--pressed.span-slice--hover {
-    background: rgba(16, 225, 249, 0.07)
+    background: var(--color6);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color6.span-slice--pressed.span-slice--hover>span.span-slice__self {
-    background: rgba(5, 165, 184, 0.1)
+    background: var(--color6);
 }
 
 .hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color6.span-slice--focused>span.span-slice__self {
-    background: #05a5b8
+    background: var(--color6);
+}
+
+
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color7.span-slice--hover {
+    background: var(--color7);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color7.span-slice--hover>span.span-slice__self {
+    background: var(--color7);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color7.span-slice--pressed.span-slice--hover {
+    background: var(--color7);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color7.span-slice--pressed.span-slice--hover>span.span-slice__self {
+    background: var(--color7);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color7.span-slice--focused>span.span-slice__self {
+    background: var(--color7);
+}
+
+
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color8.span-slice--hover {
+    background: var(--color8);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color8.span-slice--hover>span.span-slice__self {
+    background: var(--color8);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color8.span-slice--pressed.span-slice--hover {
+    background: var(--color8);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color8.span-slice--pressed.span-slice--hover>span.span-slice__self {
+    background: var(--color8);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color8.span-slice--focused>span.span-slice__self {
+    background: var(--color8);
+}
+
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color9.span-slice--hover {
+    background: var(--color9);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color9.span-slice--hover>span.span-slice__self {
+    background: var(--color9);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color9.span-slice--pressed.span-slice--hover {
+    background: var(--color9);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color9.span-slice--pressed.span-slice--hover>span.span-slice__self {
+    background: var(--color9);
+}
+
+.hierplane--theme-pink #passage p .passage__readonly .span-slice.span-slice--color9.span-slice--focused>span.span-slice__self {
+    background: var(--color9);
 }
