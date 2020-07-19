@@ -5,7 +5,7 @@
 \alias{starships}
 \title{Starwars Films and Starships}
 \format{
-An object of class \code{data.frame} with 73 rows and 11 columns.
+An object of class \code{data.frame} with 73 rows and 6 columns.
 }
 \usage{
 starships
