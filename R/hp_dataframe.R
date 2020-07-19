@@ -16,6 +16,14 @@ hp_dataframe <- function(.data,
                          settings = hierplane_settings(),
                          styles = NULL) {
 
-    x <- build_tree(.data, title, settings, styles)
-    structure(x, class = c("hierplane_tree", "hierplane_dataframe", class(x)))
+  if (is.null(settings$attributes)) {
+    settings$attributes <- grep("attribute",
+                                names(.data),
+                                value = T,
+                                ignore.case = T)
+
   }
+
+  x <- build_tree(.data, title, settings, styles)
+  structure(x, class = c("hierplane_tree", "hierplane_dataframe", class(x)))
+}
