@@ -77,7 +77,7 @@ add_layer <- function(.data,
 
   source <- attr(.data, "source")
 
-  if (any(sapply(.data, class) %in% "logical")) {
+  if (any(sapply(source, class) %in% "logical")) {
     source <- transform_logical(source)
   }
 
