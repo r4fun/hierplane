@@ -26,5 +26,6 @@ reference:
   desc: ~
   contents:
   - starships
+  - os_survey
   - style_options
 
