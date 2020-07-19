@@ -12,25 +12,26 @@ hierplane_settings(
   node_type = "node_type",
   link = "link",
   root_tag = "ROOT",
-  attributes = c("attribute1", "attribute2")
+  attributes = NULL
 )
 }
 \arguments{
 \item{type}{Either \code{hier} for standard hierplane or \code{spacy} for a spacy hierplane.}
 
-\item{parent_id}{TODO}
+\item{parent_id}{Column to be used for linkage references when generating children nodes.}
 
-\item{child_id}{TODO}
+\item{child_id}{Column to be used for \emph{generating} children nodes.}
 
-\item{child}{TODO}
+\item{child}{Column to be used for \emph{labeling} children nodes.}
 
-\item{node_type}{TODO}
+\item{node_type}{Column to be used as node type (used for plane styling).}
 
-\item{link}{TODO}
+\item{link}{Column to be used to generate lane tags (i.e. connections between planes).}
 
-\item{root_tag}{TODO}
+\item{root_tag}{Keyword in \code{link} field to be used to identify top-level plane. Defaulted to "ROOT".}
 
-\item{attributes}{TODO}
+\item{attributes}{Column(s) to be used for generating the attribute tags.
+If not specified (i.e. NULL), all columns with "attribute" in the name will be used.}
 }
 \description{
 Hierplane requires a specific data structure with things like parent IDs,

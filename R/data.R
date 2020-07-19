@@ -12,3 +12,11 @@
 #'
 #' Source: \url{https://dplyr.tidyverse.org/reference/starwars.html}
 "starships"
+
+
+#' Operating System Survey
+#'
+#' A dataframe showing popularity of operating systems among students.
+#'
+#' Source: \url{https://cran.r-project.org/web/packages/data.tree/vignettes/data.tree.html}
+"os_survey"

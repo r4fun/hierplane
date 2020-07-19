@@ -3,6 +3,8 @@
 S3method(print,hierplane_dataframe)
 S3method(print,hierplane_spacyr)
 export("%>%")
+export(add_layer)
+export(add_root)
 export(hierplane)
 export(hierplaneOutput)
 export(hierplane_settings)
