@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Starwars Films and Starships — starships • hierplane</title>
+<title>Add Root for hierarchical dataframe — add_root • hierplane</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Starwars Films and Starships — starships" />
-<meta property="og:description" content="A sample hierplane dataframe derived from the dplyr starwars dataset that
-shows the appearances of each starship in the first seven Star Wars movies." />
+<meta property="og:title" content="Add Root for hierarchical dataframe — add_root" />
+<meta property="og:description" content="Lays foundation for hierarchical dataframe used for use with hp_dataframe()." />
 
 
 
@@ -109,26 +108,38 @@ shows the appearances of each starship in the first seven Star Wars movies." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Starwars Films and Starships</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>starships.Rd</code></div>
+    <h1>Add Root for hierarchical dataframe</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/builder.R'><code>R/builder.R</code></a></small>
+    <div class="hidden name"><code>add_root.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A sample hierplane dataframe derived from the dplyr <code>starwars</code> dataset that
-shows the appearances of each starship in the first seven Star Wars movies.</p>
+    <p>Lays foundation for hierarchical dataframe used for use with <code><a href='hp_dataframe.html'>hp_dataframe()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>starships</span></pre>
+    <pre class="usage"><span class='fu'>add_root</span>(<span class='kw'>.data</span>, <span class='kw'>root</span>, attribute = <span class='kw'>NULL</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>Dataframe to construct hierarchical dataframe from (source data).</p></td>
+    </tr>
+    <tr>
+      <th>root</th>
+      <td><p>Value to display as root.</p></td>
+    </tr>
+    <tr>
+      <th>attribute</th>
+      <td><p>Values to tag root (i.e. top level) plane with.</p></td>
+    </tr>
+    </table>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>data.frame</code> with 73 rows and 6 columns.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Source: <a href='https://dplyr.tidyverse.org/reference/starwars.html'>https://dplyr.tidyverse.org/reference/starwars.html</a></p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>os_survey</span> <span class='op'>%&gt;%</span> <span class='fu'>add_root</span>(<span class='st'>"OS Students 2014/15"</span>)</div><div class='output co'>#&gt;             parent_id            child_id               child node_type link
+#&gt; 1 OS Students 2014/15 OS Students 2014/15 OS Students 2014/15      ROOT ROOT</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

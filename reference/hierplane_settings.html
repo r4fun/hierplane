@@ -129,7 +129,7 @@ which columns in their dataframe represent each of these requirements.</p>
   node_type = <span class='st'>"node_type"</span>,
   link = <span class='st'>"link"</span>,
   root_tag = <span class='st'>"ROOT"</span>,
-  attributes = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"attribute1"</span>, <span class='st'>"attribute2"</span>)
+  attributes = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -141,31 +141,32 @@ which columns in their dataframe represent each of these requirements.</p>
     </tr>
     <tr>
       <th>parent_id</th>
-      <td><p>TODO</p></td>
+      <td><p>Column to be used for linkage references when generating children nodes.</p></td>
     </tr>
     <tr>
       <th>child_id</th>
-      <td><p>TODO</p></td>
+      <td><p>Column to be used for <em>generating</em> children nodes.</p></td>
     </tr>
     <tr>
       <th>child</th>
-      <td><p>TODO</p></td>
+      <td><p>Column to be used for <em>labeling</em> children nodes.</p></td>
     </tr>
     <tr>
       <th>node_type</th>
-      <td><p>TODO</p></td>
+      <td><p>Column to be used as node type (used for plane styling).</p></td>
     </tr>
     <tr>
       <th>link</th>
-      <td><p>TODO</p></td>
+      <td><p>Column to be used to generate lane tags (i.e. connections between planes).</p></td>
     </tr>
     <tr>
       <th>root_tag</th>
-      <td><p>TODO</p></td>
+      <td><p>Keyword in <code>link</code> field to be used to identify top-level plane. Defaulted to "ROOT".</p></td>
     </tr>
     <tr>
       <th>attributes</th>
-      <td><p>TODO</p></td>
+      <td><p>Column(s) to be used for generating the attribute tags.
+If not specified (i.e. NULL), all columns with "attribute" in the name will be used.</p></td>
     </tr>
     </table>
 

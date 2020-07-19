@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Starwars Films and Starships — starships • hierplane</title>
+<title>Add Layer for hierarchical dataframe — add_layer • hierplane</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Starwars Films and Starships — starships" />
-<meta property="og:description" content="A sample hierplane dataframe derived from the dplyr starwars dataset that
-shows the appearances of each starship in the first seven Star Wars movies." />
+<meta property="og:title" content="Add Layer for hierarchical dataframe — add_layer" />
+<meta property="og:description" content="Used in conjunction with add_root() to generate dataframe for use with
+hp_dataframe()." />
 
 
 
@@ -109,26 +109,76 @@ shows the appearances of each starship in the first seven Star Wars movies." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Starwars Films and Starships</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>starships.Rd</code></div>
+    <h1>Add Layer for hierarchical dataframe</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/builder.R'><code>R/builder.R</code></a></small>
+    <div class="hidden name"><code>add_layer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A sample hierplane dataframe derived from the dplyr <code>starwars</code> dataset that
-shows the appearances of each starship in the first seven Star Wars movies.</p>
+    <p>Used in conjunction with <code><a href='add_root.html'>add_root()</a></code> to generate dataframe for use with
+<code><a href='hp_dataframe.html'>hp_dataframe()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>starships</span></pre>
+    <pre class="usage"><span class='fu'>add_layer</span>(
+  <span class='kw'>.data</span>,
+  <span class='kw'>child_col</span>,
+  node_type_col = <span class='kw'>NULL</span>,
+  node_type_vals = <span class='st'>" "</span>,
+  link_col = <span class='kw'>NULL</span>,
+  link_vals = <span class='st'>" "</span>,
+  attribute_cols = <span class='kw'>NULL</span>
+)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>Output from <code><a href='add_root.html'>add_root()</a></code> or <code>add_layer()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>child_col</th>
+      <td><p>Column to generate children from.</p></td>
+    </tr>
+    <tr>
+      <th>node_type_col, node_type_vals</th>
+      <td><p>Column or values to use as node_type.
+If not specified, all node types will be assigned as blank (" ") for the layer.</p></td>
+    </tr>
+    <tr>
+      <th>link_col, link_vals</th>
+      <td><p>Column or values to use as link.
+If not specified, all links will be assigned as blank (" ") for the layer.</p></td>
+    </tr>
+    <tr>
+      <th>attribute_cols</th>
+      <td><p>Column to use for generating attribute labels.</p></td>
+    </tr>
+    </table>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>data.frame</code> with 73 rows and 6 columns.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Source: <a href='https://dplyr.tidyverse.org/reference/starwars.html'>https://dplyr.tidyverse.org/reference/starwars.html</a></p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>os_survey</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_root.html'>add_root</a></span>(<span class='st'>"OS Students 2014/15"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'>add_layer</span>(
+    child_col = <span class='st'>"Operating System"</span>,
+    link_vals = <span class='st'>"OS"</span>,
+    node_type_vals = <span class='st'>"OS"</span>
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'>add_layer</span>(
+    child_col = <span class='st'>"OS Version"</span>,
+    link_vals = <span class='st'>"Ver"</span>,
+    node_type_vals = <span class='st'>"Sub"</span>,
+    attribute_cols = <span class='st'>"users"</span>
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='hp_dataframe.html'>hp_dataframe</a></span>(
+    title = <span class='st'>"Survey Results of Most Popular OS in 2014/15"</span>,
+    styles = <span class='fu'><a href='hierplane_styles.html'>hierplane_styles</a></span>(
+      link_to_positions = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(Ver = <span class='st'>"right"</span>)
+    )
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='hierplane.html'>hierplane</a></span>()
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
