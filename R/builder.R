@@ -93,6 +93,11 @@ add_layer <- function(.data,
   clean <- unique(source[cols])
   clean <- clean[with(clean, order(path, get(child_col))), ]
 
+  # set latest path as path
+  source$path <- paste(source$path,
+                       source[[child_col]],
+                       sep = "--")
+
   # set dataframe size by first defining children
   out <- data.frame(parent_id = clean$path,
                     child = clean[[child_col]])
@@ -118,11 +123,9 @@ add_layer <- function(.data,
   # add attributes cols
   if (!is.null(attribute_cols)) {
 
-    source$tag <- paste(source$path, source[[child_col]])
-
     for (i in 1:length(attribute_cols)) {
       a <- unname(sapply(
-        split(source[[attribute_cols[i]]], source$tag),
+        split(source[[attribute_cols[i]]], source$path),
         FUN = function(x)
           unique(x)
       ))
@@ -135,11 +138,6 @@ add_layer <- function(.data,
 
   out <- vctrs::vec_rbind(.data, layer)
 
-
-  # set latest path as path
-  source$path <- paste(source$path,
-                       source[[child_col]],
-                       sep = "--")
 
   attr(out, "source") <- source
 
