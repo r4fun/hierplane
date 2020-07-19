@@ -41,7 +41,7 @@ add_root <- function(.data, root, attribute = NULL) {
 #' If not specified, all node types will be assigned as blank (" ") for the layer.
 #' @param link_col,link_vals Column or values to use as link.
 #' If not specified, all links will be assigned as blank (" ") for the layer.
-#' @param attributes
+#' @param attribute_cols Column to use for generating attribute labels.
 #'
 #' @examples
 #' os_survey %>%
@@ -59,7 +59,6 @@ add_root <- function(.data, root, attribute = NULL) {
 #'   ) %>%
 #'   hp_dataframe(
 #'     title = "Survey Results of Most Popular OS in 2014/15",
-#'     settings = hierplane_settings(attributes = "attribute1"),
 #'     styles = hierplane_styles(
 #'       link_to_positions = list(Ver = "right")
 #'     )
