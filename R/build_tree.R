@@ -12,7 +12,7 @@ build_tree <- function(x, title, settings, styles) {
 
   jsonlite::toJSON(
     x = tree(title, root, children, settings, styles),
-    pretty = TRUE,
+    pretty = FALSE,
     auto_unbox = TRUE
   )
 }
