@@ -43,7 +43,8 @@ dt_root_df <- function(x) {
   x <- dt_root(x)
   data.frame(
     from = x,
-    to = x
+    to = x,
+    stringsAsFactors = FALSE
   )
 }
 
