@@ -1,90 +1,135 @@
-# library(data.tree)
-# library(dplyr)
-# library(hierplane)
-#
-# acme <- Node$new("Acme Inc.")
-# accounting <- acme$AddChild("Accounting")
-# software <- accounting$AddChild("New Software")
-# standards <- accounting$AddChild("New Accounting Standards")
-# research <- acme$AddChild("Research")
-# newProductLine <- research$AddChild("New Product Line")
-# newLabs <- research$AddChild("New Labs")
-# it <- acme$AddChild("IT")
-# outsource <- it$AddChild("Outsource")
-# agile <- it$AddChild("Go agile")
-# goToR <- it$AddChild("Switch to R")
-#
-# acme$Accounting$`New Software`$cost <- 1000000
-# acme$Accounting$`New Accounting Standards`$cost <- 500000
-# acme$Research$`New Product Line`$cost <- 2000000
-# acme$Research$`New Labs`$cost <- 750000
-# acme$IT$Outsource$cost <- 400000
-# acme$IT$`Go agile`$cost <- 250000
-# acme$IT$`Switch to R`$cost <- 50000
-#
-# acme$Accounting$`New Software`$p <- 0.5
-# acme$Accounting$`New Accounting Standards`$p <- 0.75
-# acme$Research$`New Product Line`$p <- 0.25
-# acme$Research$`New Labs`$p <- 0.9
-# acme$IT$Outsource$p <- 0.2
-# acme$IT$`Go agile`$p <- 0.05
-# acme$IT$`Switch to R`$p <- 1
-#
-# dt_root <- function(x) {
-#   names(x$Get("level", filterFun = data.tree::isRoot))
-# }
-#
-# dt_root_df <- function(x) {
-#   x <- dt_root(x)
-#   data.frame(
-#     from = x,
-#     to = x
-#   )
-# }
-#
-# dt_collect <- function(x) {
-#   source <- ToDataFrameNetwork(x)
-#   out <- lapply(x$fieldsAll, function(attribute) {
-#     ToDataFrameNetwork(x, attribute)[3]
-#   })
-#
-#   vctrs::vec_cbind(source, do.call(vctrs::vec_cbind, out))
-# }
-#
-# hp_datatree <- function(.data, title = "Hierplane", settings = hierplane_settings(), styles = NULL) {
-#   root <- dt_root_df(.data)
-#
-#   df <- vctrs::vec_rbind(dt_collect(.data), root)
-#
-#   print(tail(tibble::as_tibble(df)))
-#   hp_dataframe(
-#     .data = df,
-#     title = title,
-#     styles = styles,
-#     settings = settings
-#   )
-# }
-#
-# # hierplane
-# acme %>%
-#   hp_datatree(
-#     title = "Acme Inc.",
-#     settings = hierplane_settings(
-#       parent_id = "from",
-#       child_id = "to",
-#       child = "to",
-#       root_tag = "Acme Inc.",
-#       node_type = "from",
-#       link = "to",
-#       attributes = c(
-#         "cost",
-#         "p"
-#       )
-#     )
-#   ) %>%
-#   hierplane(
-#     theme = "dark",
-#     width = "auto",
-#     height = "auto"
-#   )
-#
+dt_root <- function(x) {
+  names(x$Get("level", filterFun = data.tree::isRoot))
+}
+
+dt_root_df <- function(x) {
+  x <- dt_root(x)
+  data.frame(
+    from = x,
+    to = x,
+    stringsAsFactors = FALSE
+  )
+}
+
+dt_collect <- function(x) {
+  source <- data.tree::ToDataFrameNetwork(x)
+  out <- lapply(x$fieldsAll, function(attribute) {
+    data.tree::ToDataFrameNetwork(x, attribute)[3]
+  })
+
+  vctrs::vec_cbind(source, do.call(vctrs::vec_cbind, out))
+}
+
+#' Create a hierplane object using data.tree
+#'
+#' The `data.tree` package is a popular, general purpose hierarchical data
+#' structure for R. Therefore, `hp_datatree` tries to make it so hierplane is
+#' compatible with `data.tree` objects.
+#'
+#' @param .data A `data.tree` object of class "Node".
+#' @param title A title, defaults to "Hierplane", this serves as the header/title of the hierplane.
+#' @param attributes Attributes to assign to the nodes, these are the annotation in the nodes.
+#' @param link Link connecting each node, theres are the tabs or connections you see between each node.
+#' @param styles Assign styles to hierplane generated from `hierplane_styles()`.
+#' @examples
+#' \dontrun{
+#' library(data.tree)
+#' library(yaml)
+#'
+#' "
+#' name: r4fun
+#' tyler:
+#'   name: Tyler
+#'   job: Data Scientist
+#'   species: Human
+#'   toulouse:
+#'     name: Toulouse
+#'     job: Systems Engineer
+#'     species: Cat
+#'     toulouse:
+#'       name: Toulouse
+#'       job: Systems Engineer
+#'       species: Cat
+#'   ollie:
+#'     name: Ollie
+#'     job: Database Administrator
+#'     species: Dog
+#'   lucas:
+#'     name: Lucas
+#'     job: R Programmer
+#'     species: Rabbit
+#' " -> yaml
+#'
+#' yaml %>%
+#'   yaml.load() %>%
+#'   as.Node() %>%
+#'   hp_datatree(
+#'     title = "r4fun github group",
+#'     link = "species",
+#'     attributes = "job"
+#'   ) %>%
+#'   hierplane(
+#'     theme = "light",
+#'     width = "auto",
+#'     height = "auto"
+#'   )
+#' }
+#' @export
+hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "to",
+                        styles = NULL) {
+  requireNamespaceQuietStop("data.tree")
+
+  # clean up the slashes
+  .data$Set(name = gsub("[/]", "~~~placeholder~~~", .data$Get("name")))
+
+  root <- dt_root_df(.data)
+  df <- vctrs::vec_rbind(dt_collect(.data), root)
+
+  # should only expect a single NA in the link column, this is NA comes
+  # from binding the root dataframe to the tree. If there are multiple
+  # NAs, then the there are missing links
+  missing_links <- sum(is.na(df[[link]]))
+  if (missing_links > 1) {
+      warning(paste0(
+        "There are >1 missing values in the link column [", link, "]",
+        "\n* Only the row containing the root can have a missing link value",
+        "\n* Setting link to column [to]"
+      ), call. = FALSE)
+      link <- "to"
+  }
+
+  # Links really shouldn't refer to the parent, otherwise the hierplane
+  # becomes distorted, warn the user when this happens and set the link
+  # to the child
+  if (link == "from") {
+    warning(paste0(
+      "Node link cannot refer to itself, i.e. column [", link, "]",
+      "\n* Setting link to column [to]"
+    ), call. = FALSE)
+    link <- "to"
+  }
+
+  df[[link]] <- ifelse(is.na(df[[link]]), root$from, df[[link]])
+
+  # Deal with duplicated child_id
+  df$child <- gsub(".*[/]", "", df[["to"]])
+  # change all the `----` back to `/`
+  df$from <- gsub("~~~placeholder~~~", "/", df$from)
+  df$to <- gsub("~~~placeholder~~~", "/", df$to)
+  df$child <- gsub("~~~placeholder~~~", "/", df$child)
+
+  hp_dataframe(
+    .data = df,
+    title = title,
+    styles = styles,
+    settings = hierplane_settings(
+      parent_id = "from",
+      child_id = "to",
+      child = "child",
+      root_tag = root$from,
+      node_type = "from",
+      link = link,
+      attributes = attributes
+    )
+  )
+}

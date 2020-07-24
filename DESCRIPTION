@@ -25,4 +25,5 @@ Imports:
 Suggests: 
     testthat,
     covr,
-    spacyr
+    spacyr,
+    data.tree
