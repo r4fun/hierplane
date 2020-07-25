@@ -16,6 +16,7 @@ reference:
   desc: ~
   contents:
   - hp_dataframe
+  - hp_datatree
   - hp_spacyr
 - title: Hierplane Configuration
   desc: ~
