@@ -12,12 +12,18 @@ dt_root_df <- function(x) {
 }
 
 dt_collect <- function(x) {
+  requireNamespaceQuietStop("data.tree")
   source <- data.tree::ToDataFrameNetwork(x)
-  out <- lapply(x$fieldsAll, function(attribute) {
-    data.tree::ToDataFrameNetwork(x, attribute)[3]
-  })
+  if (length(x$fieldsAll) == 0) {
+    source
+  } else {
+    out <- lapply(x$fieldsAll, function(attribute) {
+      data.tree::ToDataFrameNetwork(x, attribute)[3]
+    })
 
-  vctrs::vec_cbind(source, do.call(vctrs::vec_cbind, out))
+    vctrs::vec_cbind(source, do.call(vctrs::vec_cbind, out))
+
+  }
 }
 
 #' Create a hierplane object using data.tree

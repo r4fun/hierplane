@@ -52,20 +52,16 @@ hp_spacyr("Sam likes boats")
 hp_dataframe(starships)
 
 # from YAML, requires data.tree and yaml package
-library(data.tree)
-library(yaml)
-"
+yaml <- "
 name: r4fun
 tyler:
   name: Tyler
   job: Data Scientist
   species: Human
-" -> yaml
+"
 
-yaml %>% 
-  yaml.load() %>% 
-  as.Node() %>% 
-  hp_datatree()
+x <- data.tree::as.Node(yaml::yaml.load(yaml))
+hp_datatree(x)
 ```
 
 With this, we can render a hierplane in shiny:

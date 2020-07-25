@@ -37,7 +37,8 @@ Rendering a hierplane requires you to:
 1.  Create a hierplane object with `hp_` functions
 2.  Render the hierplane with `hierplane()`
 
-A hierplane object can be created from different input data:
+A hierplane object can be created from different input data, below are
+some examples:
 
 ``` r
 library(hierplane)
@@ -51,20 +52,16 @@ hp_dataframe(starships)
 #> <hierplane_tree object>
 
 # from YAML, requires data.tree and yaml package
-library(data.tree)
-library(yaml)
-"
+yaml <- "
 name: r4fun
 tyler:
   name: Tyler
   job: Data Scientist
   species: Human
-" -> yaml
+"
 
-yaml %>% 
-  yaml.load() %>% 
-  as.Node() %>% 
-  hp_datatree()
+x <- data.tree::as.Node(yaml::yaml.load(yaml))
+hp_datatree(x)
 #> <hierplane_tree object>
 ```
 
