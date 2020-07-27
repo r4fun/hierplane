@@ -4,20 +4,36 @@
 \alias{hp_spacyr}
 \title{Create a hierplane object using spacyr}
 \usage{
-hp_spacyr(.data, settings = spacyr_default(), styles = NULL, ...)
+hp_spacyr(
+  .data,
+  node_type = "dep_",
+  link = "dep_",
+  attributes = spacyr_default_attributes(),
+  styles = NULL,
+  ...
+)
 }
 \arguments{
-\item{.data}{A string of text.}
+\item{.data}{A sentence.}
 
-\item{settings}{Assign your dataframes columns to hierplane variables.}
+\item{node_type}{\code{spacyr::spacy_parse()} variable to be used as node type (used for plane styling).}
+
+\item{link}{\code{spacyr::spacy_parse()} variable to be used to generate lane tags (i.e. connections between planes).}
+
+\item{attributes}{\code{spacyr::spacy_parse()} variable(s) to be used for generating the attribute tags.
+See full list of available attributes here: https://spacy.io/api/token#attributes}
 
 \item{styles}{Assign styles to hierplane.}
 
-\item{...}{Additional parameters to pass to \code{spacyr::spacy_parse}}
+\item{...}{Additional parameters to pass to \code{spacyr::spacy_parse()}}
 }
 \description{
-Creating a hierplane object from a string is possible by using the \code{spacyr}
-package. More specifically, we rely on \code{spacyr::spacy_parse()} to tokenize and
-tag the string provided. Note that this functionality requires the \code{spacyr}
-package.
+Creating a hierplane object from text is made possible by employing
+the \code{spacyr} package. More specifically, the \code{spacyr::spacy_parse()} function
+is used to tokenize and tag the sentence(s) provided. Note that this
+functionality requires the \code{spacyr} package.
+}
+\details{
+If more than one sentence is detected in the input text, a list of hierplane
+objects is returned.
 }

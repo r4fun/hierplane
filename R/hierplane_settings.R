@@ -1,20 +1,3 @@
-#' Assign column names to hierplane
-#'
-#' Hierplane requires a specific data structure with things like parent IDs,
-#' child IDs, the root ID, etc. This function requires the user to identify
-#' which columns in their dataframe represent each of these requirements.
-#'
-#' @param type Either `hier` for standard hierplane or `spacy` for a spacy hierplane.
-#' @param parent_id Column to be used for linkage references when generating children nodes.
-#' @param child_id Column to be used for *generating* children nodes.
-#' @param child Column to be used for *labeling* children nodes.
-#' @param node_type Column to be used as node type (used for plane styling).
-#' @param link Column to be used to generate lane tags (i.e. connections between planes).
-#' @param root_tag Keyword in `link` field to be used to identify top-level plane. Defaulted to "ROOT".
-#' @param attributes Column(s) to be used for generating the attribute tags.
-#' If not specified (i.e. NULL), all columns with "attribute" in the name will be used.
-#'
-#' @export
 hierplane_settings <- function(type = "hier",
                                parent_id = "parent_id",
                                child_id = "child_id",
@@ -23,7 +6,7 @@ hierplane_settings <- function(type = "hier",
                                link = "link",
                                root_tag = "ROOT",
                                attributes = NULL) {
-  list(
+  x <- list(
     type = type,
     parent_id = parent_id,
     child_id = child_id,
@@ -33,4 +16,53 @@ hierplane_settings <- function(type = "hier",
     root_tag = root_tag,
     attributes = attributes
   )
+
+  check_settings(x)
+
+  structure(x, class = c("hierplane_settings", class(x)))
+
+}
+
+check_settings <- function(x) {
+
+  issues <- c()
+
+  required_settings <- c("type", "parent_id", "child_id", "child",
+                         "node_type", "link", "root_tag")
+  optional_settings <- "attributes"
+
+  if (any(x$parent_id == x$child_id)) {
+    issues <- c(issues,
+                "parent_id must be different from child_id.")
+  }
+
+  if (any(x$parent_id == x$child)) {
+    issues <- c(issues,
+                "parent_id must be different from child.")
+  }
+
+  wrong_lengths <- sapply(required_settings,
+                          function(y) length(x[[y]])) > 1
+  if (any(wrong_lengths)) {
+    wrong_settings <- required_settings[wrong_lengths]
+    issues <- c(issues,
+                paste0("The following fields must not have length > 1: ",
+                       paste(wrong_settings, collapse = ", ")))
+  }
+
+  wrong_vals <- sapply(required_settings,
+                       function(y) isTRUE(is.na(x[[y]])) | is.null(x[[y]]))
+  if (any(wrong_vals)) {
+    wrong_settings <- required_settings[wrong_vals]
+    issues <- c(issues,
+                paste0("The following fields must not be NULL or NA: ",
+                       paste(wrong_settings, collapse = ", ")))
+  }
+
+  if (length(issues) > 0) {
+    stop(paste(c("The following parameters require review:", issues),
+               collapse = " \n      * "),
+         call. = F)
+  }
+
 }

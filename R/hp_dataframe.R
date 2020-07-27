@@ -6,15 +6,40 @@
 #'
 #' @param .data A dataframe with valid hierachical features (child_id, parent_id, etc.).
 #' @param title A title, defaults to "Hierplane", this serves as the header/title of the hierplane.
-#' @param settings A named list of dataframe columns to hierplane variables generated from `hierplane_settings()`.
+#' @param parent_id Variable to be used for linkage references when generating children nodes.
+#' @param child_id Variable to be used for *generating* children nodes.
+#' @param child Variable to be used for *labeling* children nodes.
+#' @param node_type Variable to be used as node type (used for plane styling).
+#' @param link Variable to be used to generate lane tags (i.e. connections between planes).
+#' @param root_tag Keyword in `link` field to be used to identify top-level plane. Defaulted to "ROOT".
+#' @param attributes Variable(s) to be used for generating the attribute tags.
+#' If not specified (i.e. NULL), all variables with "attribute" in the name will be used.
 #' @param styles Assign styles to hierplane generated from `hierplane_styles()`.
 #'
 #' @md
 #' @export
 hp_dataframe <- function(.data,
                          title = "Hierplane",
-                         settings = hierplane_settings(),
+                         parent_id = "parent_id",
+                         child_id = "child_id",
+                         child = "child",
+                         node_type = "node_type",
+                         link = "link",
+                         root_tag = "ROOT",
+                         attributes = NULL,
                          styles = NULL) {
+
+
+  settings <- hierplane_settings(
+    type = "hier",
+    parent_id = parent_id,
+    child_id = child_id,
+    child = child,
+    node_type = node_type,
+    link = link,
+    root_tag = root_tag,
+    attributes = attributes
+  )
 
   if (is.null(settings$attributes)) {
     settings$attributes <- grep("attribute",
