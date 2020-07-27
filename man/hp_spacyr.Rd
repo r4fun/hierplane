@@ -21,7 +21,7 @@ hp_spacyr(
 \item{link}{\code{spacyr::spacy_parse()} variable to be used to generate lane tags (i.e. connections between planes).}
 
 \item{attributes}{\code{spacyr::spacy_parse()} variable(s) to be used for generating the attribute tags.
-See full list of available attributes here: https://spacy.io/api/token#attributes}
+See full list of available attributes here: \href{https://spacy.io/api/token#attributes}{}}
 
 \item{styles}{Assign styles to hierplane.}
 
@@ -36,4 +36,18 @@ functionality requires the \code{spacyr} package.
 \details{
 If more than one sentence is detected in the input text, a list of hierplane
 objects is returned.
+}
+\examples{
+if (FALSE) {
+
+  # Custom attribute tags
+  hp_spacyr("I was in college 25 years ago.", attributes = c("pos", "is_stop")) \%>\%
+    hierplane()
+
+  # Multiple sentences in input
+  hp_spacyr("I have a cat. Her name is mocha. She has a round belly.") \%>\%
+    lapply(hierplane)
+
+}
+
 }

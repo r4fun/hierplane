@@ -12,9 +12,23 @@
 #' @param node_type `spacyr::spacy_parse()` variable to be used as node type (used for plane styling).
 #' @param link `spacyr::spacy_parse()` variable to be used to generate lane tags (i.e. connections between planes).
 #' @param attributes `spacyr::spacy_parse()` variable(s) to be used for generating the attribute tags.
-#' See full list of available attributes here: https://spacy.io/api/token#attributes
+#' See full list of available attributes here: [](https://spacy.io/api/token#attributes)
 #' @param styles Assign styles to hierplane.
 #' @param ... Additional parameters to pass to `spacyr::spacy_parse()`
+#'
+#' @examples
+#' if (FALSE) {
+#'
+#'   # Custom attribute tags
+#'   hp_spacyr("I was in college 25 years ago.", attributes = c("pos", "is_stop")) %>%
+#'     hierplane()
+#'
+#'   # Multiple sentences in input
+#'   hp_spacyr("I have a cat. Her name is mocha. She has a round belly.") %>%
+#'     lapply(hierplane)
+#'
+#' }
+#'
 #' @md
 #' @export
 hp_spacyr <- function(.data,
