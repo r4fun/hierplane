@@ -12,7 +12,6 @@ dt_root_df <- function(x) {
 }
 
 dt_collect <- function(x) {
-  requireNamespaceQuietStop("data.tree")
   source <- data.tree::ToDataFrameNetwork(x)
   if (length(x$fieldsAll) == 0) {
     source
@@ -52,9 +51,9 @@ dt_collect <- function(x) {
 #'     name: Toulouse
 #'     job: Systems Engineer
 #'     species: Cat
-#'     toulouse:
-#'       name: Toulouse
-#'       job: Systems Engineer
+#'     jojo:
+#'       name: Jojo
+#'       job: Python Programmer
 #'       species: Cat
 #'   ollie:
 #'     name: Ollie
