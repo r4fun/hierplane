@@ -21,7 +21,6 @@ dt_collect <- function(x) {
     })
 
     vctrs::vec_cbind(source, do.call(vctrs::vec_cbind, out))
-
   }
 }
 
@@ -39,10 +38,11 @@ dt_collect <- function(x) {
 #' @param styles Assign styles to hierplane generated from `hierplane_styles()`.
 #' @examples
 #' \dontrun{
+#' library(hierplane)
 #' library(data.tree)
 #' library(yaml)
 #'
-#' "
+#' yaml <- "
 #' name: r4fun
 #' tyler:
 #'   name: Tyler
@@ -52,9 +52,9 @@ dt_collect <- function(x) {
 #'     name: Toulouse
 #'     job: Systems Engineer
 #'     species: Cat
-#'     jojo:
-#'       name: Jojo
-#'       job: Python Programmer
+#'     toulouse:
+#'       name: Toulouse
+#'       job: Systems Engineer
 #'       species: Cat
 #'   ollie:
 #'     name: Ollie
@@ -64,21 +64,17 @@ dt_collect <- function(x) {
 #'     name: Lucas
 #'     job: R Programmer
 #'     species: Rabbit
-#' " -> yaml
+#' "
 #'
 #' yaml %>%
 #'   yaml.load() %>%
 #'   as.Node() %>%
 #'   hp_datatree(
-#'     title = "r4fun github group",
+#'     node_type = "species",
 #'     link = "species",
 #'     attributes = "job"
 #'   ) %>%
-#'   hierplane(
-#'     theme = "light",
-#'     width = "auto",
-#'     height = "auto"
-#'   )
+#'   hierplane()
 #' }
 #' @export
 hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "to",

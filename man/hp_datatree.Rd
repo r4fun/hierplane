@@ -33,10 +33,11 @@ compatible with \code{data.tree} objects.
 }
 \examples{
 \dontrun{
+library(hierplane)
 library(data.tree)
 library(yaml)
 
-"
+yaml <- "
 name: r4fun
 tyler:
   name: Tyler
@@ -46,9 +47,9 @@ tyler:
     name: Toulouse
     job: Systems Engineer
     species: Cat
-    jojo:
-      name: Jojo
-      job: Python Programmer
+    toulouse:
+      name: Toulouse
+      job: Systems Engineer
       species: Cat
   ollie:
     name: Ollie
@@ -58,20 +59,16 @@ tyler:
     name: Lucas
     job: R Programmer
     species: Rabbit
-" -> yaml
+"
 
 yaml \%>\%
   yaml.load() \%>\%
   as.Node() \%>\%
   hp_datatree(
-    title = "r4fun github group",
+    node_type = "species",
     link = "species",
     attributes = "job"
   ) \%>\%
-  hierplane(
-    theme = "light",
-    width = "auto",
-    height = "auto"
-  )
+  hierplane()
 }
 }
