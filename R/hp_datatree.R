@@ -35,6 +35,7 @@ dt_collect <- function(x) {
 #' @param title A title, defaults to "Hierplane", this serves as the header/title of the hierplane.
 #' @param attributes Attributes to assign to the nodes, these are the annotation in the nodes.
 #' @param link Link connecting each node, theres are the tabs or connections you see between each node.
+#' @param node_type A column name that determines the node colors.
 #' @param styles Assign styles to hierplane generated from `hierplane_styles()`.
 #' @examples
 #' \dontrun{
@@ -81,7 +82,7 @@ dt_collect <- function(x) {
 #' }
 #' @export
 hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "to",
-                        styles = NULL) {
+                        node_type = "from", styles = NULL) {
   requireNamespaceQuietStop("data.tree")
 
   # clean up the slashes
@@ -132,7 +133,7 @@ hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "t
       child_id = "to",
       child = "child",
       root_tag = root$from,
-      node_type = "from",
+      node_type = node_type,
       link = link,
       attributes = attributes
     )

@@ -9,6 +9,7 @@ hp_datatree(
   title = "Hierplane",
   attributes = NULL,
   link = "to",
+  node_type = "from",
   styles = NULL
 )
 }
@@ -20,6 +21,8 @@ hp_datatree(
 \item{attributes}{Attributes to assign to the nodes, these are the annotation in the nodes.}
 
 \item{link}{Link connecting each node, theres are the tabs or connections you see between each node.}
+
+\item{node_type}{A column name that determines the node colors.}
 
 \item{styles}{Assign styles to hierplane generated from \code{hierplane_styles()}.}
 }
