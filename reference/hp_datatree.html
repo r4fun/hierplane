@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hierplane</title>
+<title>Create a hierplane object using data.tree — hp_datatree • hierplane</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create a hierplane object using data.tree — hp_datatree" />
+<meta property="og:description" content="The data.tree package is a popular, general purpose hierarchical data
+structure for R. Therefore, hp_datatree tries to make it so hierplane is
+compatible with data.tree objects." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,147 +108,121 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create a hierplane object using data.tree</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tyluRp/hierplane/blob/master/R/hp_datatree.R'><code>R/hp_datatree.R</code></a></small>
+    <div class="hidden name"><code>hp_datatree.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>The <code>data.tree</code> package is a popular, general purpose hierarchical data
+structure for R. Therefore, <code>hp_datatree</code> tries to make it so hierplane is
+compatible with <code>data.tree</code> objects.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>hp_datatree</span>(
+  <span class='kw'>.data</span>,
+  title = <span class='st'>"Hierplane"</span>,
+  attributes = <span class='kw'>NULL</span>,
+  link = <span class='st'>"to"</span>,
+  node_type = <span class='st'>"from"</span>,
+  styles = <span class='kw'>NULL</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-functions" class="hasAnchor"><a href="#section-functions" class="anchor"></a>Functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="hierplane.html">hierplane()</a></code> </p>
-        </td>
-        <td><p>Render a hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hierplane-shiny.html">hierplaneOutput()</a></code> <code><a href="hierplane-shiny.html">renderHierplane()</a></code> </p>
-        </td>
-        <td><p>Shiny bindings for hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="add_root.html">add_root()</a></code> </p>
-        </td>
-        <td><p>Add Root for hierarchical dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="add_layer.html">add_layer()</a></code> </p>
-        </td>
-        <td><p>Add Layer for hierarchical dataframe</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-hierplane-objects" class="hasAnchor"><a href="#section-hierplane-objects" class="anchor"></a>Hierplane Objects</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="hp_dataframe.html">hp_dataframe()</a></code> </p>
-        </td>
-        <td><p>Create a hierplane object from dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hp_datatree.html">hp_datatree()</a></code> </p>
-        </td>
-        <td><p>Create a hierplane object using data.tree</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hp_spacyr.html">hp_spacyr()</a></code> </p>
-        </td>
-        <td><p>Create a hierplane object using spacyr</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-hierplane-configuration" class="hasAnchor"><a href="#section-hierplane-configuration" class="anchor"></a>Hierplane Configuration</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="hierplane_settings.html">hierplane_settings()</a></code> </p>
-        </td>
-        <td><p>Assign column names to hierplane</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hierplane_styles.html">hierplane_styles()</a></code> </p>
-        </td>
-        <td><p>Add styling options</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="starships.html">starships</a></code> </p>
-        </td>
-        <td><p>Starwars Films and Starships</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="os_survey.html">os_survey</a></code> </p>
-        </td>
-        <td><p>Operating System Survey</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="style_options.html">style_options</a></code> </p>
-        </td>
-        <td><p>List of all available styles</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>A <code>data.tree</code> object of class "Node".</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>A title, defaults to "Hierplane", this serves as the header/title of the hierplane.</p></td>
+    </tr>
+    <tr>
+      <th>attributes</th>
+      <td><p>Attributes to assign to the nodes, these are the annotation in the nodes.</p></td>
+    </tr>
+    <tr>
+      <th>link</th>
+      <td><p>Link connecting each node, theres are the tabs or connections you see between each node.</p></td>
+    </tr>
+    <tr>
+      <th>node_type</th>
+      <td><p>A column name that determines the node colors.</p></td>
+    </tr>
+    <tr>
+      <th>styles</th>
+      <td><p>Assign styles to hierplane generated from <code><a href='hierplane_styles.html'>hierplane_styles()</a></code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/tyluRp/hierplane'>hierplane</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://github.com/gluc/data.tree'>data.tree</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/viking/r-yaml'>yaml</a></span>)
+
+<span class='kw'>yaml</span> <span class='op'>&lt;-</span> <span class='st'>"
+name: r4fun
+tyler:
+  name: Tyler
+  job: Data Scientist
+  species: Human
+  toulouse:
+    name: Toulouse
+    job: Systems Engineer
+    species: Cat
+    toulouse:
+      name: Toulouse
+      job: Systems Engineer
+      species: Cat
+  ollie:
+    name: Ollie
+    job: Database Administrator
+    species: Dog
+  lucas:
+    name: Lucas
+    job: R Programmer
+    species: Rabbit
+"</span>aml <- "
+name: r4fun
+tyler:
+  name: Tyler
+  job: Data Scientist
+  species: Human
+  toulouse:
+    name: Toulouse
+    job: Systems Engineer
+    species: Cat
+    toulouse:
+      name: Toulouse
+      job: Systems Engineer
+      species: Cat
+  ollie:
+    name: Ollie
+    job: Database Administrator
+    species: Dog
+  lucas:
+    name: Lucas
+    job: R Programmer
+    species: Rabbit
+"
+
+<span class='kw'>yaml</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/yaml/man/yaml.load.html'>yaml.load</a></span>() <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/data.tree/man/as.Node.html'>as.Node</a></span>() <span class='op'>%&gt;%</span>
+  <span class='fu'>hp_datatree</span>(
+    node_type = <span class='st'>"species"</span>,
+    link = <span class='st'>"species"</span>,
+    attributes = <span class='st'>"job"</span>
+  ) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='hierplane.html'>hierplane</a></span>()
+}</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

@@ -91,13 +91,28 @@
 <li>Render the hierplane with <code><a href="reference/hierplane.html">hierplane()</a></code>
 </li>
 </ol>
-<p>A hierplane object can be created from different input data. At the time of writing this, a <code>data.frame</code> or string:</p>
+<p>A hierplane object can be created from different input data, below are some examples:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tyluRp/hierplane">hierplane</a></span>)
 
-<span class="co"># requires spacyr package</span>
+<span class="co"># from a string, requires spacyr package</span>
 <span class="fu"><a href="reference/hp_spacyr.html">hp_spacyr</a></span>(<span class="st">"Sam likes boats"</span>)
-<span class="co">#&gt; &lt;hierplane_tree object: from hp_spacyr&gt;</span>
+<span class="co">#&gt; &lt;hierplane_tree object&gt;</span>
+
+<span class="co"># from a dataframe</span>
+<span class="fu"><a href="reference/hp_dataframe.html">hp_dataframe</a></span>(<span class="kw">starships</span>)
+<span class="co">#&gt; &lt;hierplane_tree object&gt;</span>
+
+<span class="co"># from YAML, requires data.tree and yaml package</span>
+<span class="kw">yaml</span> <span class="op">&lt;-</span> <span class="st">"
+name: r4fun
+tyler:
+  name: Tyler
+  job: Data Scientist
+  species: Human
+"</span>aml x <span class="op">&lt;-</span> <span class="kw">data.tree</span>::<span class="fu"><a href="https://rdrr.io/pkg/data.tree/man/as.Node.html">as.Node</a></span>(<span class="kw">yaml</span>::<span class="fu"><a href="https://rdrr.io/pkg/yaml/man/yaml.load.html">yaml.load</a></span>(<span class="kw">yaml</span>))
+<span class="fu"><a href="reference/hp_datatree.html">hp_datatree</a></span>(<span class="kw">x</span>)
+<span class="co">#&gt; &lt;hierplane_tree object&gt;</span>
 </pre></div>
 <p>With this, we can render a hierplane in shiny:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
@@ -118,8 +133,74 @@
 <span class="fu">shinyApp</span>(<span class="kw">ui</span>, <span class="kw">server</span>)
 </pre></div>
 <p><img src="reference/figures/hierplane_spacyr.png" width="100%"></p>
-<p>While hierarchical data isn’t common in a <code>data.frame</code> centric language like R, we are working on a way to parse a <code>data.frame</code> to hierplane ready data. This works by using <code><a href="reference/hp_dataframe.html">hp_dataframe()</a></code>:</p>
+<p>If you are familiar with <code>data.tree</code>, you can use it to visualize trees as well. Here is an example of generating a hierplane from YAML:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://github.com/gluc/data.tree">data.tree</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/viking/r-yaml">yaml</a></span>)
+
+<span class="st">"
+name: r4fun
+tyler:
+  name: Tyler
+  job: Data Scientist
+  species: Human
+  toulouse:
+    name: Toulouse
+    job: Systems Engineer
+    species: Cat
+    jojo:
+      name: Jojo
+      job: Python Programmer
+      species: Dog
+  ollie:
+    name: Ollie
+    job: Database Administrator
+    species: Dog
+  lucas:
+    name: Lucas
+    job: R Programmer
+    species: Rabbit
+"</span>
+name: r4fun
+tyler:
+  name: Tyler
+  job: Data Scientist
+  species: Human
+  toulouse:
+    name: Toulouse
+    job: Systems Engineer
+    species: Cat
+    jojo:
+      name: Jojo
+      job: Python Programmer
+      species: Dog
+  ollie:
+    name: Ollie
+    job: Database Administrator
+    species: Dog
+  lucas:
+    name: Lucas
+    job: R Programmer
+    species: Rabbit
+" <span class="op">-&gt;</span> <span class="kw">yaml</span>
+
+<span class="kw">yaml</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/yaml/man/yaml.load.html">yaml.load</a></span>() <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/data.tree/man/as.Node.html">as.Node</a></span>() <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/hp_datatree.html">hp_datatree</a></span>(
+    title = <span class="st">"r4fun github group"</span>,
+    link = <span class="st">"species"</span>,
+    attributes = <span class="st">"job"</span>
+  ) <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/hierplane.html">hierplane</a></span>(
+    theme = <span class="st">"light"</span>, 
+    width = <span class="st">"auto"</span>,
+    height = <span class="st">"auto"</span>
+  )
+</pre></div>
+<p><img src="reference/figures/hierplane_datatree.png" width="100%"></p>
+<p>While hierarchical data isn’t common in a <code>data.frame</code> centric language like R, we are working on a way to parse a <code>data.frame</code> to hierplane ready data. This works by using <code><a href="reference/hp_dataframe.html">hp_dataframe()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">ui</span> <span class="op">&lt;-</span> <span class="fu">fluidPage</span>(
   <span class="fu"><a href="reference/hierplane-shiny.html">hierplaneOutput</a></span>(<span class="st">"hplane"</span>)
 )
