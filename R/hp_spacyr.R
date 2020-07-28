@@ -19,7 +19,7 @@ hp_spacyr <- function(.data, settings = spacyr_default(), styles = NULL, ...) {
     settings = settings,
     styles = styles
   )
-  structure(x, class = c("hierplane_tree", "hierplane_spacyr", class(x)))
+  structure(x, class = c("hierplane_tree", class(x)))
 }
 
 spacyr_df <- function(txt, ...) {

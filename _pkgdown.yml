@@ -16,6 +16,7 @@ reference:
   desc: ~
   contents:
   - hp_dataframe
+  - hp_datatree
   - hp_spacyr
 - title: Hierplane Configuration
   desc: ~
@@ -26,5 +27,6 @@ reference:
   desc: ~
   contents:
   - starships
+  - os_survey
   - style_options
 
