@@ -68,10 +68,11 @@ hp_spacyr <- function(.data,
       styles = styles
     )
 
-    structure(x, class = c("hierplane_tree", "hierplane_spacyr", class(x)))
+    structure(x, class = c("hierplane_tree", class(x)))
   })
 
   if (length(out) == 1) out[[1]] else out
+
 
 }
 
