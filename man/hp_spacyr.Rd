@@ -41,11 +41,11 @@ objects is returned.
 if (FALSE) {
 
   # Custom attribute tags
-  hp_spacyr("I was in college 25 years ago.", attributes = c("pos", "is_stop")) \%>\%
+  hp_spacyr("A house cat is genetically 95.6\% tiger.", attributes = c("pos", "is_stop")) \%>\%
     hierplane()
 
   # Multiple sentences in input
-  hp_spacyr("I have a cat. Her name is mocha. She has a round belly.") \%>\%
+  hp_spacyr("I have a cat. Her name is Mocha. She has a round belly.") \%>\%
     lapply(hierplane)
 
 }

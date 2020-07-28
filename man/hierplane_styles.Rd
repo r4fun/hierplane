@@ -12,10 +12,10 @@ hierplane_styles(
 }
 \arguments{
 \item{node_type_to_style}{A named list of mappings from node type to styles.
-See \code{hierplane::styles$node_type_to_style} for available options.}
+See \code{hierplane::style_options$node_type_to_style} for available options.}
 
 \item{link_to_positions}{A named list of mappings from link to node placements.
-See \code{hierplane::styles$link_to_positions} for available options.}
+See \code{hierplane::style_options$link_to_positions} for available options.}
 
 \item{link_name_to_label}{A named list of mappings from link names to labels (e.g. from "Episode" to "Ep").}
 }

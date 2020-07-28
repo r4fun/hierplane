@@ -61,7 +61,7 @@ check_settings <- function(x) {
 
   if (length(issues) > 0) {
     stop(paste(c("The following parameters require review:", issues),
-               collapse = " \n      * "),
+               collapse = " \n* "),
          call. = F)
   }
 
