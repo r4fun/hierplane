@@ -25,5 +25,5 @@ hp_dataframe <- function(.data,
   }
 
   x <- build_tree(.data, title, settings, styles)
-  structure(x, class = c("hierplane_tree", "hierplane_dataframe", class(x)))
+  structure(x, class = c("hierplane_tree", class(x)))
 }
