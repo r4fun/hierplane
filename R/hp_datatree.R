@@ -52,10 +52,10 @@ dt_collect <- function(x) {
 #'     name: Toulouse
 #'     job: Systems Engineer
 #'     species: Cat
-#'     toulouse:
-#'       name: Toulouse
-#'       job: Systems Engineer
-#'       species: Cat
+#'     jojo:
+#'       name: Jojo
+#'       job: Python Programmer
+#'       species: Dog
 #'   ollie:
 #'     name: Ollie
 #'     job: Database Administrator
@@ -81,7 +81,7 @@ hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "t
                         node_type = "from", styles = NULL) {
   requireNamespaceQuietStop("data.tree")
 
-  # clean up the slashes
+  # replace slashes with placeholder
   .data$Set(name = gsub("[/]", "~~~placeholder~~~", .data$Get("name")))
 
   root <- dt_root_df(.data)
@@ -115,23 +115,25 @@ hp_datatree <- function(.data, title = "Hierplane", attributes = NULL, link = "t
 
   # Deal with duplicated child_id
   df$child <- gsub(".*[/]", "", df[["to"]])
-  # change all the `----` back to `/`
+  # Change all the placeholder tag back to `/`
   df$from <- gsub("~~~placeholder~~~", "/", df$from)
   df$to <- gsub("~~~placeholder~~~", "/", df$to)
   df$child <- gsub("~~~placeholder~~~", "/", df$child)
+
+  # Avoid displaying paths as links in case there are duplicates
+  link <- ifelse(link %in% "to", "child", link)
 
   hp_dataframe(
     .data = df,
     title = title,
     styles = styles,
-    settings = hierplane_settings(
-      parent_id = "from",
-      child_id = "to",
-      child = "child",
-      root_tag = root$from,
-      node_type = node_type,
-      link = link,
-      attributes = attributes
-    )
+    parent_id = "from",
+    child_id = "to",
+    child = "child",
+    root_tag = root$from,
+    node_type = node_type,
+    link = link,
+    attributes = attributes
+
   )
 }
