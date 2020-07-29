@@ -47,10 +47,10 @@ tyler:
     name: Toulouse
     job: Systems Engineer
     species: Cat
-    toulouse:
-      name: Toulouse
-      job: Systems Engineer
-      species: Cat
+    jojo:
+      name: Jojo
+      job: Python Programmer
+      species: Dog
   ollie:
     name: Ollie
     job: Database Administrator
