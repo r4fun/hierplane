@@ -124,7 +124,13 @@ user to provide a dataframe, title, and a list of settings.</p>
     <pre class="usage"><span class='fu'>hp_dataframe</span>(
   <span class='kw'>.data</span>,
   title = <span class='st'>"Hierplane"</span>,
-  settings = <span class='fu'><a href='hierplane_settings.html'>hierplane_settings</a></span>(),
+  parent_id = <span class='st'>"parent_id"</span>,
+  child_id = <span class='st'>"child_id"</span>,
+  child = <span class='st'>"child"</span>,
+  node_type = <span class='st'>"node_type"</span>,
+  link = <span class='st'>"link"</span>,
+  root_tag = <span class='st'>"ROOT"</span>,
+  attributes = <span class='kw'>NULL</span>,
   styles = <span class='kw'>NULL</span>
 )</pre>
 
@@ -140,8 +146,33 @@ user to provide a dataframe, title, and a list of settings.</p>
       <td><p>A title, defaults to "Hierplane", this serves as the header/title of the hierplane.</p></td>
     </tr>
     <tr>
-      <th>settings</th>
-      <td><p>A named list of dataframe columns to hierplane variables generated from <code><a href='hierplane_settings.html'>hierplane_settings()</a></code>.</p></td>
+      <th>parent_id</th>
+      <td><p>Variable to be used for linkage references when generating children nodes.</p></td>
+    </tr>
+    <tr>
+      <th>child_id</th>
+      <td><p>Variable to be used for <em>generating</em> children nodes.</p></td>
+    </tr>
+    <tr>
+      <th>child</th>
+      <td><p>Variable to be used for <em>labeling</em> children nodes.</p></td>
+    </tr>
+    <tr>
+      <th>node_type</th>
+      <td><p>Variable to be used as node type (used for plane styling).</p></td>
+    </tr>
+    <tr>
+      <th>link</th>
+      <td><p>Variable to be used to generate lane tags (i.e. connections between planes).</p></td>
+    </tr>
+    <tr>
+      <th>root_tag</th>
+      <td><p>Keyword in <code>link</code> field to be used to identify top-level plane. Defaulted to "ROOT".</p></td>
+    </tr>
+    <tr>
+      <th>attributes</th>
+      <td><p>Variable(s) to be used for generating the attribute tags.
+If not specified (i.e. NULL), all variables with "attribute" in the name will be used.</p></td>
     </tr>
     <tr>
       <th>styles</th>

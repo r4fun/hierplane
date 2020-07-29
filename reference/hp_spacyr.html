@@ -40,10 +40,10 @@
 
 
 <meta property="og:title" content="Create a hierplane object using spacyr — hp_spacyr" />
-<meta property="og:description" content="Creating a hierplane object from a string is possible by using the spacyr
-package. More specifically, we rely on spacyr::spacy_parse() to tokenize and
-tag the string provided. Note that this functionality requires the spacyr
-package." />
+<meta property="og:description" content="Creating a hierplane object from text is made possible by employing
+the spacyr package. More specifically, the spacyr::spacy_parse() function
+is used to tokenize and tag the sentence(s) provided. Note that this
+functionality requires the spacyr package." />
 
 
 
@@ -117,24 +117,40 @@ package." />
     </div>
 
     <div class="ref-description">
-    <p>Creating a hierplane object from a string is possible by using the <code>spacyr</code>
-package. More specifically, we rely on <code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> to tokenize and
-tag the string provided. Note that this functionality requires the <code>spacyr</code>
-package.</p>
+    <p>Creating a hierplane object from text is made possible by employing
+the <code>spacyr</code> package. More specifically, the <code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> function
+is used to tokenize and tag the sentence(s) provided. Note that this
+functionality requires the <code>spacyr</code> package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hp_spacyr</span>(<span class='kw'>.data</span>, settings = <span class='fu'>spacyr_default</span>(), styles = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>hp_spacyr</span>(
+  <span class='kw'>.data</span>,
+  node_type = <span class='st'>"dep_"</span>,
+  link = <span class='st'>"dep_"</span>,
+  attributes = <span class='fu'><a href='spacyr_default_attributes.html'>spacyr_default_attributes</a></span>(),
+  styles = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A string of text.</p></td>
+      <td><p>A sentence.</p></td>
     </tr>
     <tr>
-      <th>settings</th>
-      <td><p>Assign your dataframes columns to hierplane variables.</p></td>
+      <th>node_type</th>
+      <td><p><code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> variable to be used as node type (used for plane styling).</p></td>
+    </tr>
+    <tr>
+      <th>link</th>
+      <td><p><code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> variable to be used to generate lane tags (i.e. connections between planes).</p></td>
+    </tr>
+    <tr>
+      <th>attributes</th>
+      <td><p><code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code> variable(s) to be used for generating the attribute tags.
+See full list of available attributes here: <a href='https://spacy.io/api/token#attributes'></a></p></td>
     </tr>
     <tr>
       <th>styles</th>
@@ -142,11 +158,28 @@ package.</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional parameters to pass to <code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse</a></code></p></td>
+      <td><p>Additional parameters to pass to <code><a href='http://spacyr.quanteda.io/reference/spacy_parse.html'>spacyr::spacy_parse()</a></code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>If more than one sentence is detected in the input text, a list of hierplane
+objects is returned.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+
+  <span class='co'># Custom attribute tags</span>
+  <span class='fu'>hp_spacyr</span>(<span class='st'>"A house cat is genetically 95.6% tiger."</span>, attributes = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pos"</span>, <span class='st'>"is_stop"</span>)) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='hierplane.html'>hierplane</a></span>()
+
+  <span class='co'># Multiple sentences in input</span>
+  <span class='fu'>hp_spacyr</span>(<span class='st'>"I have a cat. Her name is Mocha. She has a round belly."</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='kw'>hierplane</span>)
+
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
