@@ -27,7 +27,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tyluRp/hierplane")
+devtools::install_github("r4fun/hierplane")
 ```
 
 ## Example
