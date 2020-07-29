@@ -7,7 +7,13 @@
 hp_dataframe(
   .data,
   title = "Hierplane",
-  settings = hierplane_settings(),
+  parent_id = "parent_id",
+  child_id = "child_id",
+  child = "child",
+  node_type = "node_type",
+  link = "link",
+  root_tag = "ROOT",
+  attributes = NULL,
   styles = NULL
 )
 }
@@ -16,7 +22,20 @@ hp_dataframe(
 
 \item{title}{A title, defaults to "Hierplane", this serves as the header/title of the hierplane.}
 
-\item{settings}{A named list of dataframe columns to hierplane variables generated from \code{hierplane_settings()}.}
+\item{parent_id}{Variable to be used for linkage references when generating children nodes.}
+
+\item{child_id}{Variable to be used for \emph{generating} children nodes.}
+
+\item{child}{Variable to be used for \emph{labeling} children nodes.}
+
+\item{node_type}{Variable to be used as node type (used for plane styling).}
+
+\item{link}{Variable to be used to generate lane tags (i.e. connections between planes).}
+
+\item{root_tag}{Keyword in \code{link} field to be used to identify top-level plane. Defaulted to "ROOT".}
+
+\item{attributes}{Variable(s) to be used for generating the attribute tags.
+If not specified (i.e. NULL), all variables with "attribute" in the name will be used.}
 
 \item{styles}{Assign styles to hierplane generated from \code{hierplane_styles()}.}
 }
